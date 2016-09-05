@@ -24,6 +24,7 @@
 		72222C8C1D7C703C00EA03EA /* Last.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8B1D7C703C00EA03EA /* Last.swift */; };
 		72222C8E1D7C716A00EA03EA /* StartWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8D1D7C716A00EA03EA /* StartWith.swift */; };
 		72222C901D7C745D00EA03EA /* EndWhen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8F1D7C745D00EA03EA /* EndWhen.swift */; };
+		726817E01D7E391F00395CA4 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726817DF1D7E391F00395CA4 /* Filter.swift */; };
 		727232E91D7CF34600E5E6D3 /* MemoryStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727232E81D7CF34600E5E6D3 /* MemoryStreamTests.swift */; };
 		727232EB1D7D149700E5E6D3 /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727232EA1D7D149700E5E6D3 /* Fold.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		72222C8B1D7C703C00EA03EA /* Last.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Last.swift; sourceTree = "<group>"; };
 		72222C8D1D7C716A00EA03EA /* StartWith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartWith.swift; sourceTree = "<group>"; };
 		72222C8F1D7C745D00EA03EA /* EndWhen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndWhen.swift; sourceTree = "<group>"; };
+		726817DF1D7E391F00395CA4 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		727232E81D7CF34600E5E6D3 /* MemoryStreamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStreamTests.swift; sourceTree = "<group>"; };
 		727232EA1D7D149700E5E6D3 /* Fold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fold.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +140,7 @@
 				72222C8D1D7C716A00EA03EA /* StartWith.swift */,
 				72222C8F1D7C745D00EA03EA /* EndWhen.swift */,
 				727232EA1D7D149700E5E6D3 /* Fold.swift */,
+				726817DF1D7E391F00395CA4 /* Filter.swift */,
 			);
 			name = Operators;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72222C6B1D7B528600EA03EA /* Listener.swift in Sources */,
+				726817E01D7E391F00395CA4 /* Filter.swift in Sources */,
 				72222C6F1D7B52A700EA03EA /* Stream.swift in Sources */,
 				72222C751D7B550D00EA03EA /* InternalProducer.swift in Sources */,
 				72222C821D7C52B800EA03EA /* Map.swift in Sources */,
