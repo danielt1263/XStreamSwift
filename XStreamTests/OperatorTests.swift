@@ -95,7 +95,6 @@ class OperatorTests: XCTestCase {
 		var completeCalled = false
 		
 		stream.addListener(AnyListener<Int>(next: { val in
-			print("val = \(val)")
 			XCTAssertEqual(val, expected[index])
 			index += 1
 		}, complete: {
