@@ -17,18 +17,23 @@ class Stream<T>
 
 	/// Creates a Stream that does nothing. It never emits any event.
 	public convenience init() {
-		self.init(producer: AnyProducer<T>(start: { _ in }, stop: { }))
+		self.init(producer: AnyProducer<Value>(start: { _ in }, stop: { }))
 	}
 	
 	/// Creates a Stream that immediately emits the "complete" notification when started, and that's it.
-	public static func emptyStream<T>() -> Stream<T> {
-		let producer = AnyProducer<T>(start: { $0.complete() }, stop: { })
-		return Stream<T>(producer: producer)
+	public static func emptyStream<Value>() -> Stream<Value> {
+		let producer = AnyProducer<Value>(start: { $0.complete() }, stop: { })
+		return Stream<Value>(producer: producer)
 	}
 	
 	/// Creates a Stream that immediately emits an "error" notification with the value you passed as the `error` argument when the stream starts, and that's it.
 	public convenience init(error: ErrorType) {
-		self.init(producer: AnyProducer<T>(start: { $0.error(error) }, stop: { }))
+		self.init(producer: AnyProducer<Value>(start: { $0.error(error) }, stop: { }))
+	}
+	
+	// Creates a Stream that immediately emits the arguments that you give to of, then completes.
+	public convenience init(of args: Value...) {
+		self.init(producer: FromArrayProducer(array: args))
 	}
 	
 	/// Converts an array to a stream. The returned stream will emit synchronously all the items in the array, and then complete.
