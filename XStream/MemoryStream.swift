@@ -24,10 +24,10 @@ class MemoryStream<T>: Stream<T>
 	}
 	
 	override func add(listener: ListenerType) -> RemoveToken {
-		let result = super.add(listener)
 		if let value = lastValue where nextCalled {
 			listener.next(value)
 		}
+		let result = super.add(listener)
 		return result
 	}
 

@@ -11,9 +11,9 @@ import Foundation
 
 extension Stream
 {
-	public func startWith(value: Value) -> Stream {
+	public func startWith(value: Value) -> MemoryStream<Value> {
 		let op = StartWithOperator(value: value, inStream: self)
-		return Stream(producer: op)
+		return MemoryStream(producer: op)
 	}
 }
 
@@ -26,16 +26,16 @@ class StartWithOperator<T>: Listener, Producer
 	let inStream: Stream<T>
 	var removeToken: Stream<T>.RemoveToken?
 	var outStream: AnyListener<T>?
-	var first: T
+	var value: T
 	
 	init(value: T, inStream: Stream<T>) {
 		self.inStream = inStream
-		first = value
+		self.value = value
 	}
 	
 	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
 		outStream = AnyListener(listener)
-		outStream!.next(first)
+		outStream!.next(value)
 		removeToken = inStream.addListener(self)
 	}
 	
