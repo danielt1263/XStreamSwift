@@ -95,7 +95,8 @@ class OperatorTests: XCTestCase {
 		var completeCalled = false
 		
 		stream.addListener(AnyListener<Int>(next: { val in
-			XCTAssert(val == expected[index])
+			print("val = \(val)")
+			XCTAssertEqual(val, expected[index])
 			index += 1
 		}, complete: {
 			completeCalled = true
@@ -109,8 +110,8 @@ class OperatorTests: XCTestCase {
 	
 	func testEndWhenCompletesOnNext() {
 		let expectation = self.expectationWithDescription("testEndWhenCompletesOnNext")
-		let source = periodicStream(0.25)
-		let other = periodicStream(1.125)
+		let source = periodicStream(0.2)
+		let other = periodicStream(0.9)
 		let stream = source.endWhen(other)
 		let expected = [0, 1, 2, 3]
 		var index = 0
@@ -126,6 +127,25 @@ class OperatorTests: XCTestCase {
 		}))
 		
 		self.waitForExpectationsWithTimeout(10.0) { _ in }
+	}
+	
+	func testFold() {
+		let expectation = self.expectationWithDescription("testFold")
+		let stream = periodicStream(0.20).take(4).fold(0) { $0.0 + $0.1 }
+		let expected = [0, 0, 1, 3, 6]
+		var index = 0
+		
+		stream.addListener(AnyListener<Int>(next: { val in
+			XCTAssert(val == expected[index])
+			index += 1
+		}, complete: {
+			XCTAssertEqual(index, expected.count)
+			expectation.fulfill()
+		}, error: { _ in
+			XCTFail()
+		}))
+		
+		self.waitForExpectationsWithTimeout(1.0) { _ in }
 	}
 
 }

@@ -25,6 +25,7 @@
 		72222C8E1D7C716A00EA03EA /* StartWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8D1D7C716A00EA03EA /* StartWith.swift */; };
 		72222C901D7C745D00EA03EA /* EndWhen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8F1D7C745D00EA03EA /* EndWhen.swift */; };
 		727232E91D7CF34600E5E6D3 /* MemoryStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727232E81D7CF34600E5E6D3 /* MemoryStreamTests.swift */; };
+		727232EB1D7D149700E5E6D3 /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727232EA1D7D149700E5E6D3 /* Fold.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		72222C8D1D7C716A00EA03EA /* StartWith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartWith.swift; sourceTree = "<group>"; };
 		72222C8F1D7C745D00EA03EA /* EndWhen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndWhen.swift; sourceTree = "<group>"; };
 		727232E81D7CF34600E5E6D3 /* MemoryStreamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryStreamTests.swift; sourceTree = "<group>"; };
+		727232EA1D7D149700E5E6D3 /* Fold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fold.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				72222C8B1D7C703C00EA03EA /* Last.swift */,
 				72222C8D1D7C716A00EA03EA /* StartWith.swift */,
 				72222C8F1D7C745D00EA03EA /* EndWhen.swift */,
+				727232EA1D7D149700E5E6D3 /* Fold.swift */,
 			);
 			name = Operators;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				72222C881D7C68AA00EA03EA /* Take.swift in Sources */,
 				72222C6D1D7B528C00EA03EA /* Producer.swift in Sources */,
 				72222C8E1D7C716A00EA03EA /* StartWith.swift in Sources */,
+				727232EB1D7D149700E5E6D3 /* Fold.swift in Sources */,
 				72222C7D1D7C4E7A00EA03EA /* CancelableDelay.swift in Sources */,
 				72222C8A1D7C6C2F00EA03EA /* Drop.swift in Sources */,
 				72222C861D7C66FB00EA03EA /* MapTo.swift in Sources */,
