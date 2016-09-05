@@ -9,15 +9,15 @@
 import Foundation
 
 
-public final
+public
 class Stream<T>
 {
 	public typealias Value = T
 	public typealias ListenerType = AnyListener<Value>
 
 	/// Creates a Stream that does nothing. It never emits any event.
-	public init() {
-		producer = AnyProducer<T>(start: { _ in }, stop: { })
+	public convenience init() {
+		self.init(producer: AnyProducer<T>(start: { _ in }, stop: { }))
 	}
 	
 	/// Creates a Stream that immediately emits the "complete" notification when started, and that's it.
@@ -27,14 +27,13 @@ class Stream<T>
 	}
 	
 	/// Creates a Stream that immediately emits an "error" notification with the value you passed as the `error` argument when the stream starts, and that's it.
-	public init(error: ErrorType) {
-		producer = AnyProducer<T>(start: { $0.error(error) }, stop: { })
+	public convenience init(error: ErrorType) {
+		self.init(producer: AnyProducer<T>(start: { $0.error(error) }, stop: { }))
 	}
 	
 	/// Converts an array to a stream. The returned stream will emit synchronously all the items in the array, and then complete.
-	public init(fromArray array: [Value]) {
-		let producer = FromArrayProducer(array: array)
-		self.producer = AnyProducer(producer)
+	public convenience init(fromArray array: [Value]) {
+		self.init(producer: FromArrayProducer(array: array))
 	}
 	
 	/// Creates a new Stream given a Producer.
@@ -73,9 +72,9 @@ class Stream<T>
 	
 	private let producer: AnyProducer<Value>
 	private var listeners: [String: ListenerType] = [:]
-	private var debugListener: ListenerType?
+	private var debugListener: ListenerType? = nil
 	private var ended = false
-	private var stopID: dispatch_cancelable_closure?
+	private var stopID: dispatch_cancelable_closure? = nil
 	
 	private func notify(@noescape fn: (ListenerType) -> Void) {
 		for listener in listeners.values {
@@ -90,7 +89,7 @@ class Stream<T>
 		ended = true
 	}
 	
-	private func add(listener: ListenerType) -> RemoveToken {
+	func add(listener: ListenerType) -> RemoveToken {
 		guard ended == false else { return "" }
 		let removeToken = NSUUID().UUIDString
 		listeners[removeToken] = listener
@@ -116,7 +115,7 @@ class Stream<T>
 }
 
 /// Creates a stream that periodically emits incremental numbers, every `period` seconds.
-func periodicStream(period: NSTimeInterval) -> Stream<Int> {
+public func periodicStream(period: NSTimeInterval) -> Stream<Int> {
 	return Stream(producer: PeriodicProducer(period: period))
 }
 

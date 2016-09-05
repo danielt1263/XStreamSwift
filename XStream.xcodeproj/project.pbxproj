@@ -108,8 +108,8 @@
 				72222C6E1D7B52A700EA03EA /* Stream.swift */,
 				72222C701D7B52BF00EA03EA /* MemoryStream.swift */,
 				72222C741D7B550D00EA03EA /* InternalProducer.swift */,
-				72222C551D7B527C00EA03EA /* Info.plist */,
 				72222C7C1D7C4E7A00EA03EA /* CancelableDelay.swift */,
+				72222C551D7B527C00EA03EA /* Info.plist */,
 			);
 			path = XStream;
 			sourceTree = "<group>";
