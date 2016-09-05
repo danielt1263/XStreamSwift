@@ -23,14 +23,14 @@ public
 class AnyProducer<T>: Producer
 {
 	public typealias ProducerValue = T
-	typealias ListenerType = AnyListener<T>
+	public typealias ListenerType = AnyListener<T>
 	
 	init<P: Producer where P.ProducerValue == ProducerValue>(_ producer: P) {
 		_start = producer.start
 		_stop = producer.stop
 	}
 
-	init(start: (ListenerType) -> Void, stop: () -> Void) {
+	public init(start: (ListenerType) -> Void, stop: () -> Void = { }) {
 		_start = start
 		_stop = stop
 	}
