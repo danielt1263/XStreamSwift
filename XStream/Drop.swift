@@ -3,7 +3,7 @@
 //  XStream
 //
 //  Created by Daniel Tartaglia on 9/4/16.
-//  Copyright © 2016 Daniel Tartaglia. All rights reserved.
+//  Copyright © 2016 Daniel Tartaglia. MIT License.
 //
 
 import Foundation

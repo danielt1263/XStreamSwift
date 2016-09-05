@@ -3,7 +3,7 @@
 //  XStream
 //
 //  Created by Daniel Tartaglia on 9/3/16.
-//  Copyright © 2016 Daniel Tartaglia. All rights reserved.
+//  Copyright © 2016 Daniel Tartaglia. MIT License.
 //
 
 import Foundation
@@ -70,6 +70,21 @@ class Stream<T>
 		tearDown()
 	}
 	
+	func add(listener: ListenerType) -> RemoveToken {
+		guard ended == false else { return "" }
+		let removeToken = NSUUID().UUIDString
+		listeners[removeToken] = listener
+		if listeners.count == 1 {
+			if let stopID = stopID {
+				cancel_delay(stopID)
+			}
+			else {
+				producer.start(AnyListener(next: self.next, complete: self.complete, error: self.error))
+			}
+		}
+		return removeToken
+	}
+	
 	private let producer: AnyProducer<Value>
 	private var listeners: [String: ListenerType] = [:]
 	private var debugListener: ListenerType? = nil
@@ -87,21 +102,6 @@ class Stream<T>
 		producer.stop()
 		listeners = [:]
 		ended = true
-	}
-	
-	func add(listener: ListenerType) -> RemoveToken {
-		guard ended == false else { return "" }
-		let removeToken = NSUUID().UUIDString
-		listeners[removeToken] = listener
-		if listeners.count == 1 {
-			if let stopID = stopID {
-				cancel_delay(stopID)
-			}
-			else {
-				producer.start(AnyListener(next: self.next, complete: self.complete, error: self.error))
-			}
-		}
-		return removeToken
 	}
 	
 	private func remove(token: RemoveToken) {
