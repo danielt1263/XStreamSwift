@@ -11,8 +11,8 @@ import Foundation
 
 extension Stream
 {
-	public func map<U>(project: (Value) throws -> U) -> Stream<U> {
-		let op = MapOperator(project: project, inStream: self)
+	public func map<U>(transform: (Value) throws -> U) -> Stream<U> {
+		let op = MapOperator(transform: transform, inStream: self)
 		return Stream<U>(producer: op)
 	}
 }
@@ -25,11 +25,11 @@ class MapOperator<T, U>: Listener, Producer
 	let inStream: Stream<T>
 	var removeToken: Stream<T>.RemoveToken?
 	var outStream: AnyListener<U>?
-	let project: (T) throws -> U
+	let transform: (T) throws -> U
 	
-	init(project: (T) throws -> U, inStream: Stream<T>) {
+	init(transform: (T) throws -> U, inStream: Stream<T>) {
 		self.inStream = inStream
-		self.project = project
+		self.transform = transform
 	}
 	
 	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
@@ -45,7 +45,7 @@ class MapOperator<T, U>: Listener, Producer
 
 	func next(value: ListenerValue) {
 		do {
-			outStream?.next(try project(value))
+			outStream?.next(try transform(value))
 		}
 		catch {
 			outStream?.error(error)
