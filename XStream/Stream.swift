@@ -31,7 +31,7 @@ class Stream<T>
 		self.init(producer: AnyProducer<Value>(start: { $0.error(error) }, stop: { }))
 	}
 	
-	// Creates a Stream that immediately emits the arguments that you give to of, then completes.
+	/// Creates a Stream that immediately emits the arguments that you give to of, then completes.
 	public convenience init(of args: Value...) {
 		self.init(producer: FromArrayProducer(array: args))
 	}
