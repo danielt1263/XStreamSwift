@@ -19,7 +19,8 @@ extension Stream
 }
 
 
-class StartWithOperator<T>: Listener, Producer
+private
+final class StartWithOperator<T>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = T

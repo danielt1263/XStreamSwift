@@ -19,7 +19,8 @@ extension Stream
 }
 
 
-class MapToOperator<T, U>: Listener, Producer
+private
+final class MapToOperator<T, U>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = U

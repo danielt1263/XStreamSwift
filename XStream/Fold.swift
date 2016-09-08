@@ -24,7 +24,8 @@ extension Stream
 	}
 }
 
-class FoldOperator<T, U>: Listener, Producer
+private
+final class FoldOperator<T, U>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = U

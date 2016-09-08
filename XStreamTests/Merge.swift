@@ -10,7 +10,7 @@ import XCTest
 @testable import XStream
 
 
-class merge: XCTestCase
+final class merge: XCTestCase
 {
 	func testMergesStreams() {
 		let expectation = self.expectationWithDescription("testMergesStreams")
@@ -27,6 +27,31 @@ class merge: XCTestCase
 			expectation.fulfill()
 		}, error: { _ in
 			XCTFail()
+		}))
+		
+		self.waitForExpectationsWithTimeout(10.0) { _ in
+			XCTAssertEqual(index, expected.count)
+			XCTAssert(completeCalled)
+		}
+	}
+	
+	func testCompleteAfterAllComplete() {
+		let expectation = self.expectationWithDescription("testCompleteAfterAllComplete")
+		let stream1 = periodicStream(0.15).take(1)
+		let stream2 = periodicStream(0.25).take(4)
+		let stream = Stream(streams: [stream1, stream2])
+		let expected = [0, 0, 1, 2, 3]
+		var index = 0
+		var completeCalled = false
+		
+		stream.add(AnyListener<Int>(next: { val in
+			XCTAssertEqual(val, expected[index])
+			index += 1
+			}, complete: {
+				completeCalled = true
+				expectation.fulfill()
+			}, error: { _ in
+				XCTFail()
 		}))
 		
 		self.waitForExpectationsWithTimeout(10.0) { _ in

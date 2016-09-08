@@ -22,8 +22,8 @@ extension Stream
 	}
 }
 
-
-class OtherListener<U>: Listener
+private
+final class OtherListener<U>: Listener
 {
 	typealias ListenerValue = U
 
@@ -42,7 +42,8 @@ class OtherListener<U>: Listener
 	}
 }
 
-class EndWhenOperator<T, U>: Listener, Producer
+private
+final class EndWhenOperator<T, U>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = T

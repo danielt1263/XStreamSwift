@@ -19,7 +19,8 @@ extension Stream
 }
 
 
-class DropOperator<T>: Listener, Producer
+private
+final class DropOperator<T>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = T
@@ -56,8 +57,12 @@ class DropOperator<T>: Listener, Producer
 		}
 	}
 	
-	func complete() { outStream?.complete() }
+	func complete() {
+		outStream?.complete()
+	}
 	
-	func error(err: ErrorType) { outStream?.error(err) }
+	func error(err: ErrorType) {
+		outStream?.error(err)
+	}
 	
 }

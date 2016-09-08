@@ -10,7 +10,7 @@ import XCTest
 @testable import XStream
 
 
-class OperatorTests: XCTestCase {
+final class OperatorTests: XCTestCase {
     
 	func testMap() {
 		let stream = Stream(fromArray: [1, 2, 3]).map { $0 * 10 }

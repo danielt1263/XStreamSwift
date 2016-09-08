@@ -23,7 +23,8 @@ extension Stream
 }
 
 
-class FilterOperator<T>: Listener, Producer
+private
+final class FilterOperator<T>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = T

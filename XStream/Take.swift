@@ -19,7 +19,8 @@ extension Stream
 }
 
 
-class TakeOperator<T>: Listener, Producer
+private
+final class TakeOperator<T>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = T

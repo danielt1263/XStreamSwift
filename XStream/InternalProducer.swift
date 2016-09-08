@@ -9,7 +9,7 @@
 import Foundation
 
 
-class FromArrayProducer<T>: Producer
+final class FromArrayProducer<T>: Producer
 {
 	typealias ProducerValue = T
 	
@@ -29,7 +29,8 @@ class FromArrayProducer<T>: Producer
 	private let array: [T]
 }
 
-class PeriodicProducer: Producer
+
+final class PeriodicProducer: Producer
 {
 	typealias ProducerValue = Int
 	
@@ -53,6 +54,6 @@ class PeriodicProducer: Producer
 		count = 0
 	}
 	
-	var count = 0
-	var timer: dispatch_source_t
+	private var count = 0
+	private var timer: dispatch_source_t
 }

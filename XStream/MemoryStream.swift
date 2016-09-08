@@ -9,8 +9,8 @@
 import Foundation
 
 
-public final
-class MemoryStream<T>: Stream<T>
+public
+final class MemoryStream<T>: Stream<T>
 {
 	/// Creates a new Stream given a Producer.
 	public override init<P: Producer where P.ProducerValue == Value>(producer: P) {

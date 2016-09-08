@@ -10,7 +10,7 @@ import XCTest
 @testable import XStream
 
 
-class MemoryStreamTests: XCTestCase
+final class MemoryStreamTests: XCTestCase
 {
 	func testRemembersLastNext() {
 		let stream = MemoryStream<Int>()

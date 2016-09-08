@@ -19,7 +19,7 @@ extension StreamConvertable where Value: StreamConvertable
 
 
 private
-class FlattenOperator<T: StreamConvertable>: Listener, Producer
+final class FlattenOperator<T: StreamConvertable>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = T.Value
@@ -84,7 +84,7 @@ class FlattenOperator<T: StreamConvertable>: Listener, Producer
 
 
 private
-class FlattenListener<T>: Listener
+final class FlattenListener<T>: Listener
 {
 	let outStream: AnyListener<T>
 	let finished: () -> Void

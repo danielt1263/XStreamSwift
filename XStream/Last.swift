@@ -19,7 +19,8 @@ extension Stream
 }
 
 
-class LastOperator<T>: Listener, Producer
+private
+final class LastOperator<T>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = T

@@ -18,7 +18,8 @@ extension Stream
 	}
 }
 
-class MapOperator<T, U>: Listener, Producer
+private
+final class MapOperator<T, U>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = U

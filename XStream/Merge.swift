@@ -22,7 +22,7 @@ extension Stream
 	}
 }
 
-class MergeProducer<T>: Listener, Producer
+final class MergeProducer<T>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = T

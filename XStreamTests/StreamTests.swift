@@ -9,7 +9,7 @@
 import XCTest
 @testable import XStream
 
-class StreamTests: XCTestCase {
+final class StreamTests: XCTestCase {
 
 	func testAddingListinerStartsProducer() {
 		var started: Bool = false

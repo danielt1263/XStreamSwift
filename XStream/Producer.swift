@@ -20,7 +20,7 @@ protocol Producer: class
 
 
 public
-class AnyProducer<T>: Producer
+final class AnyProducer<T>: Producer
 {
 	public typealias ProducerValue = T
 	public typealias ListenerType = AnyListener<T>
