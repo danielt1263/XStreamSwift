@@ -10,7 +10,7 @@ import Foundation
 
 
 public
-protocol Producer: class
+protocol Producer
 {
 	associatedtype ProducerValue
 

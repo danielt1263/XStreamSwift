@@ -21,7 +21,7 @@ protocol Listener
 
 
 public
-struct AnyListener<T>: Listener
+final class AnyListener<T>: Listener
 {
 	public typealias ListenerValue = T
 
