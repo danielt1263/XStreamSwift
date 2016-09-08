@@ -10,7 +10,16 @@ import Foundation
 
 
 public
-class Stream<T>
+protocol StreamConvertable
+{
+	associatedtype Value
+	
+	func asStream() -> Stream<Value>
+}
+
+
+public
+class Stream<T>: StreamConvertable
 {
 	public typealias Value = T
 	public typealias ListenerType = AnyListener<Value>
@@ -56,6 +65,10 @@ class Stream<T>
 	/// Removes a Listener from the Stream, assuming the Listener was added to it.
 	public func removeListener(token: RemoveToken) {
 		remove(token)
+	}
+
+	public func asStream() -> Stream<Value> {
+		return self
 	}
 
 	func next(value: Value) {
