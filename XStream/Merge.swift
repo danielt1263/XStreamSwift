@@ -11,17 +11,23 @@ import Foundation
 
 extension Stream
 {
-	//public convenience init(streams: Stream<T>...) {
-	//	let producer = MergeProducer<T>(inStreams: streams)
-	//	self.init(producer: producer)
-	//}
-	//
 	public convenience init(streams: [Stream<T>]) {
 		let producer = MergeProducer<T>(inStreams: streams)
 		self.init(producer: producer)
 	}
 }
 
+
+extension SequenceType where Generator.Element: StreamConvertable
+{
+	public func merge() -> Stream<Generator.Element.Value> {
+		let producer = MergeProducer(inStreams: self.map { $0.asStream() })
+		return Stream<Generator.Element.Value>(producer: producer)
+	}
+}
+
+
+private
 final class MergeProducer<T>: Listener, Producer
 {
 	typealias ListenerValue = T
