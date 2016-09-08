@@ -11,6 +11,7 @@ import Foundation
 
 extension Stream
 {
+	/// Transforms each event from the input Stream through a `transform` function, to get a Stream that emits those transformed events.
 	public func map<U>(transform: (Value) throws -> U) -> Stream<U> {
 		let op = MapOperator(transform: transform, inStream: self)
 		return Stream<U>(producer: op)

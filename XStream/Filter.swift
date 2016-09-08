@@ -11,6 +11,11 @@ import Foundation
 
 extension Stream
 {
+	/**
+	Only allows events that pass the test given by the `includeElement` argument.
+
+	Each event from the input stream is given to the `includeElement` function. If the function returns `true`, the event is forwarded to the output stream, otherwise it is ignored and not forwarded.
+	*/
 	public func filter(includeElement: (Value) throws -> Bool) -> Stream {
 		let op = FilterOperator(includeElement: includeElement, inStream: self)
 		return Stream(producer: op)
@@ -22,28 +27,28 @@ class FilterOperator<T>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = T
-	
+
 	let inStream: Stream<T>
 	var removeToken: Stream<T>.RemoveToken?
 	var outStream: AnyListener<T>?
 	let includeElement: (T) throws -> Bool
-	
+
 	init(includeElement: (T) throws -> Bool, inStream: Stream<T>) {
 		self.inStream = inStream
 		self.includeElement = includeElement
 	}
-	
+
 	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
 		outStream = AnyListener(listener)
 		removeToken = inStream.addListener(self)
 	}
-	
+
 	func stop() {
 		guard let removeToken = removeToken else { return }
 		inStream.removeListener(removeToken)
 		outStream = nil
 	}
-	
+
 	func next(value: ListenerValue) {
 		do {
 			if try includeElement(value) {
@@ -54,9 +59,9 @@ class FilterOperator<T>: Listener, Producer
 			outStream?.error(error)
 		}
 	}
-	
+
 	func complete() { outStream?.complete() }
-	
+
 	func error(err: ErrorType) { outStream?.error(err) }
 	
 }

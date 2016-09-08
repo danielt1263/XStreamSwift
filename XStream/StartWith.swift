@@ -11,8 +11,9 @@ import Foundation
 
 extension Stream
 {
-	public func startWith(value: Value) -> MemoryStream<Value> {
-		let op = StartWithOperator(value: value, inStream: self)
+	/// Prepends the given `initial` value to the sequence of events emitted by the input stream. The returned stream is a `MemoryStream`, which means it is already `remember()`'d.
+	public func startWith(initial: Value) -> MemoryStream<Value> {
+		let op = StartWithOperator(value: initial, inStream: self)
 		return MemoryStream(producer: op)
 	}
 }

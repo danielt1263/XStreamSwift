@@ -11,6 +11,7 @@ import Foundation
 
 extension Stream
 {
+	/// When the input stream completes, the output stream will emit the last event emitted by the input stream, and then will also complete.
 	public func last() -> Stream {
 		let op = LastOperator(inStream: self)
 		return Stream(producer: op)

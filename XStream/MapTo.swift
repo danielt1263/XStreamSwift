@@ -11,6 +11,7 @@ import Foundation
 
 extension Stream
 {
+	/// It's like `map`, but always transforms each input event to the same constant value on the output Stream.
 	public func mapTo<U>(value: U) -> Stream<U> {
 		let op = MapToOperator(value: value, inStream: self)
 		return Stream<U>(producer: op)

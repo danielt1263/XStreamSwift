@@ -11,6 +11,7 @@ import Foundation
 
 extension Stream
 {
+	/// Lets the first `count` events from the input stream pass to the output stream, then makes the output stream complete.
 	public func take(count: Int) -> Stream {
 		let op = TakeOperator(count: count, inStream: self)
 		return Stream(producer: op)

@@ -11,6 +11,7 @@ import Foundation
 
 extension Stream
 {
+	/// Ignores the first `count` events from the input stream, and then after that starts forwarding events from the input stream to the output stream.
 	public func drop(count: Int) -> Stream {
 		let op = DropOperator(count: count, inStream: self)
 		return Stream(producer: op)
