@@ -31,6 +31,7 @@
 		72AF895C1D80ED6C0054A7E3 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AF895B1D80ED6C0054A7E3 /* Merge.swift */; };
 		72AF895E1D80EE160054A7E3 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AF895D1D80EE160054A7E3 /* Merge.swift */; };
 		72EF7B641D85C92800739FC1 /* ReplaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EF7B631D85C92800739FC1 /* ReplaceError.swift */; };
+		72EF7B661D85CE9000739FC1 /* Compose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EF7B651D85CE9000739FC1 /* Compose.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		72AF895B1D80ED6C0054A7E3 /* Merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Merge.swift; sourceTree = "<group>"; };
 		72AF895D1D80EE160054A7E3 /* Merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Merge.swift; sourceTree = "<group>"; };
 		72EF7B631D85C92800739FC1 /* ReplaceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceError.swift; sourceTree = "<group>"; };
+		72EF7B651D85CE9000739FC1 /* Compose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compose.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 		72222C801D7C52A500EA03EA /* Operators */ = {
 			isa = PBXGroup;
 			children = (
+				72EF7B651D85CE9000739FC1 /* Compose.swift */,
 				72222C891D7C6C2F00EA03EA /* Drop.swift */,
 				72222C8F1D7C745D00EA03EA /* EndWhen.swift */,
 				726817DF1D7E391F00395CA4 /* Filter.swift */,
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72222C6B1D7B528600EA03EA /* Listener.swift in Sources */,
+				72EF7B661D85CE9000739FC1 /* Compose.swift in Sources */,
 				726817E01D7E391F00395CA4 /* Filter.swift in Sources */,
 				72222C6F1D7B52A700EA03EA /* Stream.swift in Sources */,
 				72AF895E1D80EE160054A7E3 /* Merge.swift in Sources */,
