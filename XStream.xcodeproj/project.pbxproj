@@ -30,6 +30,7 @@
 		727232EB1D7D149700E5E6D3 /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727232EA1D7D149700E5E6D3 /* Fold.swift */; };
 		72AF895C1D80ED6C0054A7E3 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AF895B1D80ED6C0054A7E3 /* Merge.swift */; };
 		72AF895E1D80EE160054A7E3 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AF895D1D80EE160054A7E3 /* Merge.swift */; };
+		72EF7B641D85C92800739FC1 /* ReplaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EF7B631D85C92800739FC1 /* ReplaceError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		727232EA1D7D149700E5E6D3 /* Fold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fold.swift; sourceTree = "<group>"; };
 		72AF895B1D80ED6C0054A7E3 /* Merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Merge.swift; sourceTree = "<group>"; };
 		72AF895D1D80EE160054A7E3 /* Merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Merge.swift; sourceTree = "<group>"; };
+		72EF7B631D85C92800739FC1 /* ReplaceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,13 +145,14 @@
 				72222C891D7C6C2F00EA03EA /* Drop.swift */,
 				72222C8F1D7C745D00EA03EA /* EndWhen.swift */,
 				726817DF1D7E391F00395CA4 /* Filter.swift */,
+				72148FE61D7F986F00297F0E /* Flatten.swift */,
 				727232EA1D7D149700E5E6D3 /* Fold.swift */,
 				72222C8B1D7C703C00EA03EA /* Last.swift */,
 				72222C811D7C52B800EA03EA /* Map.swift */,
 				72222C851D7C66FB00EA03EA /* MapTo.swift */,
+				72EF7B631D85C92800739FC1 /* ReplaceError.swift */,
 				72222C8D1D7C716A00EA03EA /* StartWith.swift */,
 				72222C871D7C68AA00EA03EA /* Take.swift */,
-				72148FE61D7F986F00297F0E /* Flatten.swift */,
 			);
 			name = Operators;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				72222C6F1D7B52A700EA03EA /* Stream.swift in Sources */,
 				72AF895E1D80EE160054A7E3 /* Merge.swift in Sources */,
 				72222C751D7B550D00EA03EA /* InternalProducer.swift in Sources */,
+				72EF7B641D85C92800739FC1 /* ReplaceError.swift in Sources */,
 				72222C821D7C52B800EA03EA /* Map.swift in Sources */,
 				72222C901D7C745D00EA03EA /* EndWhen.swift in Sources */,
 				72148FE71D7F986F00297F0E /* Flatten.swift in Sources */,
