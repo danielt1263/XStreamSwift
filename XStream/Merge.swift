@@ -18,11 +18,11 @@ extension Stream
 }
 
 
-extension SequenceType where Generator.Element: StreamConvertable
+extension Sequence where Iterator.Element: StreamConvertable
 {
-	public func merge() -> Stream<Generator.Element.Value> {
+	public func merge() -> Stream<Iterator.Element.Value> {
 		let producer = MergeProducer(inStreams: self.map { $0.asStream() })
-		return Stream<Generator.Element.Value>(producer: producer)
+		return Stream<Iterator.Element.Value>(producer: producer)
 	}
 }
 
@@ -42,11 +42,11 @@ final class MergeProducer<T>: Listener, Producer
 		self.inStreams = inStreams
 	}
 	
-	func start<L: Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L: Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		outStream = AnyListener(listener)
 		activeCount = inStreams.count
 		for stream in inStreams {
-			removeTokens.append(stream.add(AnyListener(self)))
+			removeTokens.append(stream.add(listener: AnyListener(self)))
 		}
 	}
 	
@@ -57,7 +57,7 @@ final class MergeProducer<T>: Listener, Producer
 		outStream = nil
 	}
 
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		outStream?.next(value)
 	}
 	
@@ -68,8 +68,8 @@ final class MergeProducer<T>: Listener, Producer
 		}
 	}
 	
-	func error(err: ErrorType) {
-		outStream?.error(err)
+	func error(_ error: Error) {
+		outStream?.error(error)
 	}
 
 }

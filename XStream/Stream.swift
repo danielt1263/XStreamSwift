@@ -30,13 +30,13 @@ class Stream<T>: StreamConvertable
 	}
 	
 	/// Creates a Stream that immediately emits the "complete" notification when started, and that's it.
-	public static func emptyStream<Value>() -> Stream<Value> {
+	open static func emptyStream<Value>() -> Stream<Value> {
 		let producer = AnyProducer<Value>(start: { $0.complete() }, stop: { })
 		return Stream<Value>(producer: producer)
 	}
 	
 	/// Creates a Stream that immediately emits an "error" notification with the value you passed as the `error` argument when the stream starts, and that's it.
-	public convenience init(error: ErrorType) {
+	public convenience init(error: Error) {
 		self.init(producer: AnyProducer<Value>(start: { $0.error(error) }, stop: { }))
 	}
 	
@@ -51,27 +51,27 @@ class Stream<T>: StreamConvertable
 	}
 	
 	/// Creates a new Stream given a Producer.
-	public init<P: Producer where P.ProducerValue == Value>(producer: P) {
-		self.producer = AnyProducer(producer)
+	public init<P: Producer>(producer: P) where P.ProducerValue == Value {
+		self.producer = AnyProducer<Value>(producer)
 	}
 	
 	public typealias RemoveToken = String
 	
 	/// Adds a Listener to the Stream.
-	public func addListener<L: Listener where Value == L.ListenerValue>(listener: L) -> RemoveToken {
-		return add(AnyListener(listener))
+	open func add<L: Listener>(listener: L) -> RemoveToken where Value == L.ListenerValue {
+		return _add(AnyListener(listener))
 	}
 	
 	/// Removes a Listener from the Stream, assuming the Listener was added to it.
-	public func removeListener(token: RemoveToken) {
+	open func removeListener(_ token: RemoveToken) {
 		remove(token)
 	}
 
-	public func asStream() -> Stream<Value> {
+	open func asStream() -> Stream<Value> {
 		return self
 	}
 
-	func next(value: Value) {
+	func next(_ value: Value) {
 		debugListener?.next(value)
 		notify { $0.next(value) }
 	}
@@ -82,22 +82,22 @@ class Stream<T>: StreamConvertable
 		tearDown()
 	}
 	
-	func error(err: ErrorType) {
-		debugListener?.error(err)
-		notify { $0.error(err) }
+	func error(_ error: Error) {
+		debugListener?.error(error)
+		notify { $0.error(error) }
 		tearDown()
 	}
 	
-	func add(listener: ListenerType) -> RemoveToken {
+	func _add(_ listener: ListenerType) -> RemoveToken {
 		guard ended == false else { return "" }
-		let removeToken = NSUUID().UUIDString
+		let removeToken = UUID().uuidString
 		listeners[removeToken] = listener
 		if listeners.count == 1 {
 			if let stopID = stopID {
 				cancel_delay(stopID)
 			}
 			else {
-				producer.start(AnyListener(next: self.next, complete: self.complete, error: self.error))
+				producer.start(for: AnyListener(next: self.next, complete: self.complete, error: self.error))
 			}
 		}
 		return removeToken
@@ -109,7 +109,7 @@ class Stream<T>: StreamConvertable
 	private var ended = false
 	private var stopID: dispatch_cancelable_closure? = nil
 	
-	private func notify(@noescape fn: (ListenerType) -> Void) {
+	private func notify(_ fn: (ListenerType) -> Void) {
 		for listener in listeners.values {
 			fn(listener)
 		}
@@ -122,8 +122,8 @@ class Stream<T>: StreamConvertable
 		ended = true
 	}
 	
-	private func remove(token: RemoveToken) {
-		listeners.removeValueForKey(token)
+	private func remove(_ token: RemoveToken) {
+		listeners.removeValue(forKey: token)
 		if listeners.count == 0 {
 			stopID = delay(0.1) {
 				self.producer.stop()
@@ -133,7 +133,7 @@ class Stream<T>: StreamConvertable
 }
 
 /// Creates a stream that periodically emits incremental numbers, every `period` seconds.
-public func periodicStream(period: NSTimeInterval) -> Stream<Int> {
+public func periodicStream(_ period: TimeInterval) -> Stream<Int> {
 	return Stream(producer: PeriodicProducer(period: period))
 }
 

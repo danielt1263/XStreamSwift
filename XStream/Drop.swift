@@ -12,7 +12,7 @@ import Foundation
 extension Stream
 {
 	/// Ignores the first `count` events from the input stream, and then after that starts forwarding events from the input stream to the output stream.
-	public func drop(count: Int) -> Stream {
+	public func drop(_ count: Int) -> Stream {
 		let op = DropOperator(count: count, inStream: self)
 		return Stream(producer: op)
 	}
@@ -36,9 +36,9 @@ final class DropOperator<T>: Listener, Producer
 		self.max = count
 	}
 	
-	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		outStream = AnyListener(listener)
-		removeToken = inStream.addListener(self)
+		removeToken = inStream.add(listener: self)
 		dropped = 0
 	}
 	
@@ -48,7 +48,7 @@ final class DropOperator<T>: Listener, Producer
 		outStream = nil
 	}
 	
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		if dropped < max {
 			dropped += 1
 		}
@@ -61,8 +61,8 @@ final class DropOperator<T>: Listener, Producer
 		outStream?.complete()
 	}
 	
-	func error(err: ErrorType) {
-		outStream?.error(err)
+	func error(_ error: Error) {
+		outStream?.error(error)
 	}
 	
 }

@@ -12,7 +12,7 @@ import Foundation
 extension Stream
 {
 	/// It's like `map`, but always transforms each input event to the same constant value on the output Stream.
-	public func mapTo<U>(value: U) -> Stream<U> {
+	public func mapTo<U>(_ value: U) -> Stream<U> {
 		let op = MapToOperator(value: value, inStream: self)
 		return Stream<U>(producer: op)
 	}
@@ -35,9 +35,9 @@ final class MapToOperator<T, U>: Listener, Producer
 		self.toValue = value
 	}
 	
-	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		outStream = AnyListener(listener)
-		removeToken = inStream.addListener(self)
+		removeToken = inStream.add(listener: self)
 	}
 	
 	func stop() {
@@ -46,12 +46,12 @@ final class MapToOperator<T, U>: Listener, Producer
 		outStream = nil
 	}
 	
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		outStream?.next(toValue)
 	}
 	
 	func complete() { outStream?.complete() }
 	
-	func error(err: ErrorType) { outStream?.error(err) }
+	func error(_ error: Error) { outStream?.error(error) }
 	
 }

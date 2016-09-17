@@ -34,9 +34,9 @@ final class LastOperator<T>: Listener, Producer
 		self.inStream = inStream
 	}
 	
-	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		outStream = AnyListener(listener)
-		removeToken = inStream.addListener(self)
+		removeToken = inStream.add(listener: self)
 	}
 	
 	func stop() {
@@ -45,7 +45,7 @@ final class LastOperator<T>: Listener, Producer
 		outStream = nil
 	}
 	
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		last = value
 	}
 	
@@ -56,6 +56,6 @@ final class LastOperator<T>: Listener, Producer
 		outStream?.complete()
 	}
 	
-	func error(err: ErrorType) { outStream?.error(err) }
+	func error(_ error: Error) { outStream?.error(error) }
 	
 }

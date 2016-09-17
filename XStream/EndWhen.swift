@@ -16,7 +16,7 @@ extension Stream
 
 	When the given `other` stream emits an event or completes, the output stream will complete. Before that happens, the output stream will behaves like the input stream.
 	*/
-	public func endWhen<U>(other: Stream<U>) -> Stream<Value> {
+	public func endWhen<U>(_ other: Stream<U>) -> Stream<Value> {
 		let op = EndWhenOperator(other: other, inStream: self)
 		return Stream<Value>(producer: op)
 	}
@@ -29,7 +29,7 @@ final class OtherListener<U>: Listener
 
 	var callback: () -> Void = { }
 
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		callback()
 	}
 
@@ -37,7 +37,7 @@ final class OtherListener<U>: Listener
 		callback()
 	}
 
-	func error(err: ErrorType) {
+	func error(_ error: Error) {
 
 	}
 }
@@ -61,10 +61,10 @@ final class EndWhenOperator<T, U>: Listener, Producer
 		self.otherListener = OtherListener()
 	}
 
-	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		outStream = AnyListener(listener)
-		removeToken = inStream.addListener(self)
-		otherRemoveToken = otherStream.addListener(otherListener)
+		removeToken = inStream.add(listener: self)
+		otherRemoveToken = otherStream.add(listener: otherListener)
 		self.otherListener.callback = {
 			self.outStream?.complete()
 		}
@@ -79,7 +79,7 @@ final class EndWhenOperator<T, U>: Listener, Producer
 		otherStream.removeListener(otherRemoveToken)
 	}
 
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		outStream?.next(value)
 	}
 
@@ -87,8 +87,8 @@ final class EndWhenOperator<T, U>: Listener, Producer
 		outStream?.complete()
 	}
 
-	func error(err: ErrorType) {
-		outStream?.error(err)
+	func error(_ error: Error) {
+		outStream?.error(error)
 	}
 	
 }

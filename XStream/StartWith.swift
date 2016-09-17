@@ -12,7 +12,7 @@ import Foundation
 extension Stream
 {
 	/// Prepends the given `initial` value to the sequence of events emitted by the input stream. The returned stream is a `MemoryStream`, which means it is already `remember()`'d.
-	public func startWith(initial: Value) -> MemoryStream<Value> {
+	public func startWith(_ initial: Value) -> Stream<Value> {
 		let op = StartWithOperator(value: initial, inStream: self)
 		return MemoryStream(producer: op)
 	}
@@ -35,10 +35,10 @@ final class StartWithOperator<T>: Listener, Producer
 		self.value = value
 	}
 	
-	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		outStream = AnyListener(listener)
 		outStream!.next(value)
-		removeToken = inStream.addListener(self)
+		removeToken = inStream.add(listener: self)
 	}
 	
 	func stop() {
@@ -47,7 +47,7 @@ final class StartWithOperator<T>: Listener, Producer
 		outStream = nil
 	}
 	
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		outStream?.next(value)
 	}
 	
@@ -55,8 +55,8 @@ final class StartWithOperator<T>: Listener, Producer
 		outStream?.complete()
 	}
 	
-	func error(err: ErrorType) {
-		outStream?.error(err)
+	func error(_ error: Error) {
+		outStream?.error(error)
 	}
 	
 }

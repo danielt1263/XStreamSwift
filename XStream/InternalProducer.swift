@@ -17,7 +17,7 @@ final class FromArrayProducer<T>: Producer
 		self.array = array
 	}
 	
-	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		for item in array {
 			listener.next(item)
 		}
@@ -34,26 +34,26 @@ final class PeriodicProducer: Producer
 {
 	typealias ProducerValue = Int
 	
-	init(period: NSTimeInterval) {
-		timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0))
-		
-		let interval = period * NSTimeInterval(NSEC_PER_SEC)
-		dispatch_source_set_timer(timer, dispatch_time( DISPATCH_TIME_NOW, Int64(interval)), UInt64(interval), 0)
+	init(period: TimeInterval) {
+		timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos: .userInitiated))
+		let timeInterval = DispatchTimeInterval.milliseconds(Int(period * 1000.0))
+		let start = DispatchTime.now() + timeInterval
+		timer.scheduleRepeating(deadline: start, interval: timeInterval)
 	}
 	
-	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
-		dispatch_source_set_event_handler(timer) {
+	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
+		timer.setEventHandler {
 			listener.next(self.count)
 			self.count += 1
 		}
-		dispatch_resume(timer)
+		timer.resume()
 	}
 	
 	func stop() {
-		dispatch_suspend(timer)
+		timer.suspend()
 		count = 0
 	}
 	
 	private var count = 0
-	private var timer: dispatch_source_t
+	private var timer: DispatchSourceTimer
 }

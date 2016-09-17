@@ -7,32 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		72148FE71D7F986F00297F0E /* Flatten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72148FE61D7F986F00297F0E /* Flatten.swift */; };
-		72222C541D7B527C00EA03EA /* XStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 72222C531D7B527C00EA03EA /* XStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		72222C5B1D7B527C00EA03EA /* XStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72222C501D7B527C00EA03EA /* XStream.framework */; };
-		72222C601D7B527C00EA03EA /* StreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C5F1D7B527C00EA03EA /* StreamTests.swift */; };
-		72222C6B1D7B528600EA03EA /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C6A1D7B528600EA03EA /* Listener.swift */; };
-		72222C6D1D7B528C00EA03EA /* Producer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C6C1D7B528C00EA03EA /* Producer.swift */; };
-		72222C6F1D7B52A700EA03EA /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C6E1D7B52A700EA03EA /* Stream.swift */; };
-		72222C711D7B52BF00EA03EA /* MemoryStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C701D7B52BF00EA03EA /* MemoryStream.swift */; };
-		72222C751D7B550D00EA03EA /* InternalProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C741D7B550D00EA03EA /* InternalProducer.swift */; };
-		72222C7D1D7C4E7A00EA03EA /* CancelableDelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C7C1D7C4E7A00EA03EA /* CancelableDelay.swift */; };
-		72222C7F1D7C521500EA03EA /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C7E1D7C521500EA03EA /* OperatorTests.swift */; };
-		72222C821D7C52B800EA03EA /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C811D7C52B800EA03EA /* Map.swift */; };
-		72222C861D7C66FB00EA03EA /* MapTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C851D7C66FB00EA03EA /* MapTo.swift */; };
-		72222C881D7C68AA00EA03EA /* Take.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C871D7C68AA00EA03EA /* Take.swift */; };
-		72222C8A1D7C6C2F00EA03EA /* Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C891D7C6C2F00EA03EA /* Drop.swift */; };
-		72222C8C1D7C703C00EA03EA /* Last.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8B1D7C703C00EA03EA /* Last.swift */; };
-		72222C8E1D7C716A00EA03EA /* StartWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8D1D7C716A00EA03EA /* StartWith.swift */; };
-		72222C901D7C745D00EA03EA /* EndWhen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8F1D7C745D00EA03EA /* EndWhen.swift */; };
-		726817E01D7E391F00395CA4 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726817DF1D7E391F00395CA4 /* Filter.swift */; };
-		727232E91D7CF34600E5E6D3 /* MemoryStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727232E81D7CF34600E5E6D3 /* MemoryStreamTests.swift */; };
-		727232EB1D7D149700E5E6D3 /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727232EA1D7D149700E5E6D3 /* Fold.swift */; };
-		72AF895C1D80ED6C0054A7E3 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AF895B1D80ED6C0054A7E3 /* Merge.swift */; };
-		72AF895E1D80EE160054A7E3 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AF895D1D80EE160054A7E3 /* Merge.swift */; };
-		72C33D831D88E55F00FAA5A6 /* Remember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C33D821D88E55F00FAA5A6 /* Remember.swift */; };
-		72EF7B641D85C92800739FC1 /* ReplaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EF7B631D85C92800739FC1 /* ReplaceError.swift */; };
-		72EF7B661D85CE9000739FC1 /* Compose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EF7B651D85CE9000739FC1 /* Compose.swift */; };
+72148FE71D7F986F00297F0E /* Flatten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72148FE61D7F986F00297F0E /* Flatten.swift */; };
+72222C541D7B527C00EA03EA /* XStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 72222C531D7B527C00EA03EA /* XStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+72222C5B1D7B527C00EA03EA /* XStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72222C501D7B527C00EA03EA /* XStream.framework */; };
+72222C601D7B527C00EA03EA /* StreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C5F1D7B527C00EA03EA /* StreamTests.swift */; };
+72222C6B1D7B528600EA03EA /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C6A1D7B528600EA03EA /* Listener.swift */; };
+72222C6D1D7B528C00EA03EA /* Producer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C6C1D7B528C00EA03EA /* Producer.swift */; };
+72222C6F1D7B52A700EA03EA /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C6E1D7B52A700EA03EA /* Stream.swift */; };
+72222C711D7B52BF00EA03EA /* MemoryStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C701D7B52BF00EA03EA /* MemoryStream.swift */; };
+72222C751D7B550D00EA03EA /* InternalProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C741D7B550D00EA03EA /* InternalProducer.swift */; };
+72222C7D1D7C4E7A00EA03EA /* CancelableDelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C7C1D7C4E7A00EA03EA /* CancelableDelay.swift */; };
+72222C7F1D7C521500EA03EA /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C7E1D7C521500EA03EA /* OperatorTests.swift */; };
+72222C821D7C52B800EA03EA /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C811D7C52B800EA03EA /* Map.swift */; };
+72222C861D7C66FB00EA03EA /* MapTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C851D7C66FB00EA03EA /* MapTo.swift */; };
+72222C881D7C68AA00EA03EA /* Take.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C871D7C68AA00EA03EA /* Take.swift */; };
+72222C8A1D7C6C2F00EA03EA /* Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C891D7C6C2F00EA03EA /* Drop.swift */; };
+72222C8C1D7C703C00EA03EA /* Last.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8B1D7C703C00EA03EA /* Last.swift */; };
+72222C8E1D7C716A00EA03EA /* StartWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8D1D7C716A00EA03EA /* StartWith.swift */; };
+72222C901D7C745D00EA03EA /* EndWhen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8F1D7C745D00EA03EA /* EndWhen.swift */; };
+726817E01D7E391F00395CA4 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726817DF1D7E391F00395CA4 /* Filter.swift */; };
+727232E91D7CF34600E5E6D3 /* MemoryStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727232E81D7CF34600E5E6D3 /* MemoryStreamTests.swift */; };
+727232EB1D7D149700E5E6D3 /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727232EA1D7D149700E5E6D3 /* Fold.swift */; };
+72AF895C1D80ED6C0054A7E3 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AF895B1D80ED6C0054A7E3 /* Merge.swift */; };
+72AF895E1D80EE160054A7E3 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AF895D1D80EE160054A7E3 /* Merge.swift */; };
+72C33D831D88E55F00FAA5A6 /* Remember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C33D821D88E55F00FAA5A6 /* Remember.swift */; };
+72EF7B641D85C92800739FC1 /* ReplaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EF7B631D85C92800739FC1 /* ReplaceError.swift */; };
+72EF7B661D85CE9000739FC1 /* Compose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EF7B651D85CE9000739FC1 /* Compose.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,14 +220,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Daniel Tartaglia";
 				TargetAttributes = {
 					72222C4F1D7B527C00EA03EA = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					72222C591D7B527C00EA03EA = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -271,26 +273,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72222C6B1D7B528600EA03EA /* Listener.swift in Sources */,
-				72EF7B661D85CE9000739FC1 /* Compose.swift in Sources */,
-				726817E01D7E391F00395CA4 /* Filter.swift in Sources */,
-				72222C6F1D7B52A700EA03EA /* Stream.swift in Sources */,
-				72AF895E1D80EE160054A7E3 /* Merge.swift in Sources */,
-				72222C751D7B550D00EA03EA /* InternalProducer.swift in Sources */,
-				72EF7B641D85C92800739FC1 /* ReplaceError.swift in Sources */,
-				72222C821D7C52B800EA03EA /* Map.swift in Sources */,
-				72222C901D7C745D00EA03EA /* EndWhen.swift in Sources */,
-				72148FE71D7F986F00297F0E /* Flatten.swift in Sources */,
-				72222C711D7B52BF00EA03EA /* MemoryStream.swift in Sources */,
-				72222C8C1D7C703C00EA03EA /* Last.swift in Sources */,
-				72C33D831D88E55F00FAA5A6 /* Remember.swift in Sources */,
-				72222C881D7C68AA00EA03EA /* Take.swift in Sources */,
-				72222C6D1D7B528C00EA03EA /* Producer.swift in Sources */,
-				72222C8E1D7C716A00EA03EA /* StartWith.swift in Sources */,
-				727232EB1D7D149700E5E6D3 /* Fold.swift in Sources */,
-				72222C7D1D7C4E7A00EA03EA /* CancelableDelay.swift in Sources */,
-				72222C8A1D7C6C2F00EA03EA /* Drop.swift in Sources */,
-				72222C861D7C66FB00EA03EA /* MapTo.swift in Sources */,
+72222C6B1D7B528600EA03EA /* Listener.swift in Sources */,
+72EF7B661D85CE9000739FC1 /* Compose.swift in Sources */,
+726817E01D7E391F00395CA4 /* Filter.swift in Sources */,
+72222C6F1D7B52A700EA03EA /* Stream.swift in Sources */,
+72AF895E1D80EE160054A7E3 /* Merge.swift in Sources */,
+72222C751D7B550D00EA03EA /* InternalProducer.swift in Sources */,
+72EF7B641D85C92800739FC1 /* ReplaceError.swift in Sources */,
+72222C821D7C52B800EA03EA /* Map.swift in Sources */,
+72222C901D7C745D00EA03EA /* EndWhen.swift in Sources */,
+72148FE71D7F986F00297F0E /* Flatten.swift in Sources */,
+72222C711D7B52BF00EA03EA /* MemoryStream.swift in Sources */,
+72222C8C1D7C703C00EA03EA /* Last.swift in Sources */,
+72C33D831D88E55F00FAA5A6 /* Remember.swift in Sources */,
+72222C881D7C68AA00EA03EA /* Take.swift in Sources */,
+72222C6D1D7B528C00EA03EA /* Producer.swift in Sources */,
+72222C8E1D7C716A00EA03EA /* StartWith.swift in Sources */,
+727232EB1D7D149700E5E6D3 /* Fold.swift in Sources */,
+72222C7D1D7C4E7A00EA03EA /* CancelableDelay.swift in Sources */,
+72222C8A1D7C6C2F00EA03EA /* Drop.swift in Sources */,
+72222C861D7C66FB00EA03EA /* MapTo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,8 +332,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -343,7 +347,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+                GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -379,8 +383,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -400,6 +406,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -411,6 +418,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -422,6 +430,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -429,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -439,6 +449,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.danielt1263.XStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -449,6 +460,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.danielt1263.XStreamTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -459,6 +471,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.danielt1263.XStreamTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

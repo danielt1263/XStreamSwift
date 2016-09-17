@@ -11,8 +11,8 @@ import Foundation
 
 extension StreamConvertable where Value: StreamConvertable
 {
-	public func flatten<S: StreamConvertable where S.Value == Value>() -> Stream<Value.Value> {
-		let op = FlattenOperator(inStream: self.asStream())
+	public func flatten<S: StreamConvertable>() -> Stream<Value.Value> where S.Value == Value {
+		let op = FlattenOperator<Value>(inStream: self.asStream())
 		return Stream(producer: op)
 	}
 }
@@ -32,13 +32,13 @@ final class FlattenOperator<T: StreamConvertable>: Listener, Producer
 	private var innerRemoveToken: Stream<T.Value>.RemoveToken?
 	private var open: Bool = true
 	
-	private init(inStream: Stream<T>) {
+	init(inStream: Stream<T>) {
 		self.inStream = inStream
 	}
 	
-	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		outStream = AnyListener(listener)
-		removeToken = inStream.addListener(self)
+		removeToken = inStream.add(listener: self)
 		open = true
 	}
 	
@@ -48,13 +48,13 @@ final class FlattenOperator<T: StreamConvertable>: Listener, Producer
 		outStream = nil
 	}
 	
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		let newStream = value.asStream()
 		removeInner()
 		guard let outStream = outStream else { return }
 		innerStream = newStream
 		innerListener = FlattenListener<T.Value>(outStream: outStream, finished: self.less)
-		innerRemoveToken = newStream.add(AnyListener(innerListener!))
+		innerRemoveToken = newStream.add(listener: AnyListener(innerListener!))
 	}
 	
 	func complete() {
@@ -62,12 +62,12 @@ final class FlattenOperator<T: StreamConvertable>: Listener, Producer
 		less()
 	}
 	
-	func error(err: ErrorType) {
+	func error(_ error: Error) {
 		removeInner()
-		outStream?.error(err)
+		outStream?.error(error)
 	}
 	
-	func removeInner() {
+	private func removeInner() {
 		guard let innerRemoveToken = innerRemoveToken else { return }
 		innerStream?.removeListener(innerRemoveToken)
 		innerStream = nil
@@ -75,7 +75,7 @@ final class FlattenOperator<T: StreamConvertable>: Listener, Producer
 		self.innerRemoveToken = nil
 	}
 	
-	func less() {
+	private func less() {
 		if open == false && innerStream == nil {
 			outStream?.complete()
 		}
@@ -86,17 +86,17 @@ final class FlattenOperator<T: StreamConvertable>: Listener, Producer
 private
 final class FlattenListener<T>: Listener
 {
-	let outStream: AnyListener<T>
-	let finished: () -> Void
+	private let outStream: AnyListener<T>
+	private let finished: () -> Void
 	
 	typealias ListenerValue = T
 
-	init(outStream: AnyListener<T>, finished: () -> Void) {
+	init(outStream: AnyListener<T>, finished: @escaping () -> Void) {
 		self.outStream = outStream
 		self.finished = finished
 	}
 	
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		outStream.next(value)
 	}
 	
@@ -104,7 +104,7 @@ final class FlattenListener<T>: Listener
 		finished()
 	}
 	
-	func error(err: ErrorType) {
-		outStream.error(err)
+	func error(_ error: Error) {
+		outStream.error(error)
 	}
 }

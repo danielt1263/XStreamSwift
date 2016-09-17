@@ -14,7 +14,7 @@ protocol Producer
 {
 	associatedtype ProducerValue
 
-	func start<L: Listener where ProducerValue == L.ListenerValue>(listener: L)
+	func start<L: Listener>(for listener: L) where ProducerValue == L.ListenerValue
 	func stop()
 }
 
@@ -25,18 +25,17 @@ final class AnyProducer<T>: Producer
 	public typealias ProducerValue = T
 	public typealias ListenerType = AnyListener<T>
 	
-	init<P: Producer where P.ProducerValue == ProducerValue>(_ producer: P) {
-		_start = producer.start
-		_stop = producer.stop
+	public convenience init<P: Producer>(_ producer: P) where P.ProducerValue == ProducerValue {
+		self.init(start: { producer.start(for: $0) }, stop: producer.stop)
 	}
 
-	public init(start: (ListenerType) -> Void, stop: () -> Void = { }) {
+	public init(start: @escaping (ListenerType) -> Void, stop: @escaping () -> Void = { }) {
 		_start = start
 		_stop = stop
 	}
 
-	public func start<L: Listener where ProducerValue == L.ListenerValue>(listener: L) {
-		_start(ListenerType(listener))
+	public func start<L: Listener>(for listener: L) where ProducerValue == L.ListenerValue {
+		_start(AnyListener(listener))
 	}
 	
 	public func stop() {

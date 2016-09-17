@@ -17,7 +17,7 @@ final class MemoryStreamTests: XCTestCase
 		var nextCalled = false
 		
 		stream.next(1)
-		stream.addListener(AnyListener<Int>(next: { val in
+		let _ = stream.add(listener: AnyListener<Int>(next: { val in
 			XCTAssertEqual(val, 1)
 			nextCalled = true
 		}, complete: {

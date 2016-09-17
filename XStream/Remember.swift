@@ -12,7 +12,7 @@ import Foundation
 extension Stream
 {
 	/// Returns an output stream that behaves like the input stream, but also remembers the most recent event that happens on the input stream, so that a newly added listener will immediately receive that memorised event.
-	public func remember() -> MemoryStream<Value> {
+	public func remember() -> Stream<Value> {
 		let op = RememberOperator(inStream: self)
 		return MemoryStream(producer: op)
 	}
@@ -32,9 +32,9 @@ final class RememberOperator<T>: Producer
 		self.inStream = inStream
 	}
 	
-	func start<L : Listener where T == L.ListenerValue>(listener: L) {
+	func start<L : Listener>(for listener: L) where T == L.ListenerValue {
 		outStream = AnyListener(listener)
-		removeToken = inStream.addListener(listener)
+		removeToken = inStream.add(listener: listener)
 	}
 	
 	func stop() {

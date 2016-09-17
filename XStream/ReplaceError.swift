@@ -15,7 +15,7 @@ extension Stream
 	
 	When (and if) an error happens on the input stream, instead of forwarding that error to the output stream, *replaceError* will call the `replace` function which returns the stream that the output stream will replicate. And, in case that new stream also emits an error, `replace` will be called again to get another stream to start replicating.
 	*/
-	public func replaceError(replace: (err: ErrorType) throws -> Stream) -> Stream {
+	public func replaceError(_ replace: @escaping (_ error: Error) throws -> Stream) -> Stream {
 		let op = ReplaceErrorOperator(replace: replace, inStream: self)
 		return Stream(producer: op)
 	}
@@ -30,16 +30,16 @@ class ReplaceErrorOperator<T>: Listener, Producer
 	var inStream: Stream<ListenerValue>
 	var removeToken: Stream<ListenerValue>.RemoveToken?
 	var outStream: AnyListener<ProducerValue>?
-	let replace: (error: ErrorType) throws -> Stream<ProducerValue>
+	let replace: (_ error: Error) throws -> Stream<ProducerValue>
 	
-	init(replace: (error: ErrorType) throws -> Stream<ProducerValue>, inStream: Stream<ListenerValue>) {
+	init(replace: @escaping (_ error: Error) throws -> Stream<ProducerValue>, inStream: Stream<ListenerValue>) {
 		self.inStream = inStream
 		self.replace = replace
 	}
 	
-	func start<L: Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L: Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		outStream = AnyListener(listener)
-		removeToken = inStream.addListener(self)
+		removeToken = inStream.add(listener: self)
 	}
 	
 	func stop() {
@@ -48,7 +48,7 @@ class ReplaceErrorOperator<T>: Listener, Producer
 		outStream = nil
 	}
 
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		outStream?.next(value)
 	}
 	
@@ -56,15 +56,15 @@ class ReplaceErrorOperator<T>: Listener, Producer
 		outStream?.complete()
 	}
 
-	func error(err: ErrorType) {
+	func error(_ error: Error) {
 		guard let removeToken = removeToken else { return }
 		do {
 			inStream.removeListener(removeToken)
-			inStream = try replace(error: err)
-			self.removeToken = inStream.addListener(self)
+			inStream = try replace(error)
+			self.removeToken = inStream.add(listener: self)
 		}
 		catch {
-			outStream?.error(err)
+			outStream?.error(error)
 		}
 	}
 

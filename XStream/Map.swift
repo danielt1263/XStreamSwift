@@ -12,7 +12,7 @@ import Foundation
 extension Stream
 {
 	/// Transforms each event from the input Stream through a `transform` function, to get a Stream that emits those transformed events.
-	public func map<U>(transform: (Value) throws -> U) -> Stream<U> {
+	public func map<U>(_ transform: @escaping (Value) throws -> U) -> Stream<U> {
 		let op = MapOperator(transform: transform, inStream: self)
 		return Stream<U>(producer: op)
 	}
@@ -29,14 +29,14 @@ final class MapOperator<T, U>: Listener, Producer
 	var outStream: AnyListener<U>?
 	let transform: (T) throws -> U
 	
-	init(transform: (T) throws -> U, inStream: Stream<T>) {
+	init(transform: @escaping (T) throws -> U, inStream: Stream<T>) {
 		self.inStream = inStream
 		self.transform = transform
 	}
 	
-	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		outStream = AnyListener(listener)
-		removeToken = inStream.addListener(self)
+		removeToken = inStream.add(listener: self)
 	}
 
 	func stop() {
@@ -45,7 +45,7 @@ final class MapOperator<T, U>: Listener, Producer
 		outStream = nil
 	}
 
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		do {
 			outStream?.next(try transform(value))
 		}
@@ -56,6 +56,6 @@ final class MapOperator<T, U>: Listener, Producer
 	
 	func complete() { outStream?.complete() }
 	
-	func error(err: ErrorType) { outStream?.error(err) }
+	func error(_ error: Error) { outStream?.error(error) }
 
 }

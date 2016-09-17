@@ -14,9 +14,9 @@ protocol Listener
 {
 	associatedtype ListenerValue
 
-	func next(value: ListenerValue)
+	func next(_ value: ListenerValue)
 	func complete()
-	func error(err: ErrorType)
+	func error(_ error: Error)
 }
 
 
@@ -25,23 +25,21 @@ final class AnyListener<T>: Listener
 {
 	public typealias ListenerValue = T
 
-	init<L: Listener where L.ListenerValue == ListenerValue>(_ l: L) {
-		_next = l.next
-		_error = l.error
-		_complete = l.complete
+	public convenience init<L: Listener>(_ listener: L) where L.ListenerValue == ListenerValue {
+		self.init(next: listener.next, complete: listener.complete, error: listener.error)
 	}
 	
-	init(next: (ListenerValue) -> Void, complete: () -> Void, error: (ErrorType) -> Void) {
+	init(next: @escaping (ListenerValue) -> Void, complete: @escaping () -> Void, error: @escaping (Error) -> Void) {
 		_next = next
 		_error = error
 		_complete = complete
 	}
 	
-	public func next(value: ListenerValue) { _next(value) }
+	public func next(_ value: ListenerValue) { _next(value) }
 	public func complete() { _complete() }
-	public func error(err: ErrorType) { _error(err) }
+	public func error(_ error: Error) { _error(error) }
 	
 	private let _next: (T) -> Void
 	private let _complete: () -> Void
-	private let _error: (ErrorType) -> Void
+	private let _error: (Error) -> Void
 }

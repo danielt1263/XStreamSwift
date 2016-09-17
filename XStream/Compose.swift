@@ -16,7 +16,7 @@ extension Stream
 	*compose* is a handy way of using an existing function in a chained style. Instead of writing `outStream = f(inStream)` you can write `outStream = inStream.compose(f)`.
 	*/
 	public
-	func compose<U>(fn: (Stream) -> Stream<U>) -> Stream<U> {
+	func compose<U>(_ fn: (Stream) -> Stream<U>) -> Stream<U> {
 		return fn(self)
 	}
 }

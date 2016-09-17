@@ -16,7 +16,7 @@ extension Stream
 
 	Each event from the input stream is given to the `includeElement` function. If the function returns `true`, the event is forwarded to the output stream, otherwise it is ignored and not forwarded.
 	*/
-	public func filter(includeElement: (Value) throws -> Bool) -> Stream {
+	public func filter(_ includeElement: @escaping (Value) throws -> Bool) -> Stream {
 		let op = FilterOperator(includeElement: includeElement, inStream: self)
 		return Stream(producer: op)
 	}
@@ -34,14 +34,14 @@ final class FilterOperator<T>: Listener, Producer
 	var outStream: AnyListener<T>?
 	let includeElement: (T) throws -> Bool
 
-	init(includeElement: (T) throws -> Bool, inStream: Stream<T>) {
+	init(includeElement: @escaping (T) throws -> Bool, inStream: Stream<T>) {
 		self.inStream = inStream
 		self.includeElement = includeElement
 	}
 
-	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		outStream = AnyListener(listener)
-		removeToken = inStream.addListener(self)
+		removeToken = inStream.add(listener: self)
 	}
 
 	func stop() {
@@ -50,7 +50,7 @@ final class FilterOperator<T>: Listener, Producer
 		outStream = nil
 	}
 
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		do {
 			if try includeElement(value) {
 				outStream?.next(value)
@@ -63,6 +63,6 @@ final class FilterOperator<T>: Listener, Producer
 
 	func complete() { outStream?.complete() }
 
-	func error(err: ErrorType) { outStream?.error(err) }
+	func error(_ error: Error) { outStream?.error(error) }
 	
 }

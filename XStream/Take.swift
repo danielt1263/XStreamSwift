@@ -12,7 +12,7 @@ import Foundation
 extension Stream
 {
 	/// Lets the first `count` events from the input stream pass to the output stream, then makes the output stream complete.
-	public func take(count: Int) -> Stream {
+	public func take(_ count: Int) -> Stream {
 		let op = TakeOperator(count: count, inStream: self)
 		return Stream(producer: op)
 	}
@@ -36,9 +36,9 @@ final class TakeOperator<T>: Listener, Producer
 		self.max = count
 	}
 	
-	func start<L : Listener where ProducerValue == L.ListenerValue>(listener: L) {
+	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
 		outStream = AnyListener(listener)
-		removeToken = inStream.addListener(self)
+		removeToken = inStream.add(listener: self)
 		taken = 0
 	}
 	
@@ -48,7 +48,7 @@ final class TakeOperator<T>: Listener, Producer
 		outStream = nil
 	}
 	
-	func next(value: ListenerValue) {
+	func next(_ value: ListenerValue) {
 		outStream?.next(value)
 		taken += 1
 		if taken == max {
@@ -58,6 +58,6 @@ final class TakeOperator<T>: Listener, Producer
 	
 	func complete() { outStream?.complete() }
 	
-	func error(err: ErrorType) { outStream?.error(err) }
+	func error(_ error: Error) { outStream?.error(error) }
 
 }

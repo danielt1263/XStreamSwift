@@ -9,25 +9,24 @@
 import Foundation
 
 
-public
 final class MemoryStream<T>: Stream<T>
 {
 	/// Creates a new Stream given a Producer.
-	public override init<P: Producer where P.ProducerValue == Value>(producer: P) {
-		super.init(producer: AnyProducer(producer))
+	public override init<P: Producer>(producer: P) where P.ProducerValue == Value {
+		super.init(producer: producer)
 	}
 	
-	override func next(value: Value) {
+	override func next(_ value: Value) {
 		lastValue = value
 		nextCalled = true
 		super.next(value)
 	}
 	
-	override func add(listener: ListenerType) -> RemoveToken {
-		if let value = lastValue where nextCalled {
+	override func _add(_ listener: ListenerType) -> RemoveToken {
+		if let value = lastValue , nextCalled {
 			listener.next(value)
 		}
-		let result = super.add(listener)
+		let result = super._add(listener)
 		return result
 	}
 
