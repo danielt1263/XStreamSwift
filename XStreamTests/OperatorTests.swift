@@ -135,7 +135,7 @@ final class OperatorTests: XCTestCase {
 		var index = 0
 		
 		let _ = stream.add(listener: AnyListener<Int>(next: { val in
-			XCTAssert(val == expected[index])
+			XCTAssertEqual(val, expected[index])
 			index += 1
 		}, complete: {
 			XCTAssertEqual(index, expected.count)
@@ -147,4 +147,21 @@ final class OperatorTests: XCTestCase {
 		self.waitForExpectations(timeout: 1.0) { _ in }
 	}
 
+	func testDebugInspecting() {
+		let expectation = self.expectation(description: "testDebugInspecting")
+		let expected = [0, 1, 2]
+		var index = 0
+		let stream = periodicStream(0.20).take(3).debug {
+			XCTAssertEqual($0, expected[index])
+			index += 1
+		}
+		let listener = AnyListener<Int>(next: {
+			if $0 == 2 {
+				XCTAssertEqual(index, expected.count)
+				expectation.fulfill()
+			}
+		}, complete: { }, error: { _ in XCTFail() })
+		let _ = stream.add(listener: listener)
+		self.waitForExpectations(timeout: 1.0) { _ in }
+	}
 }

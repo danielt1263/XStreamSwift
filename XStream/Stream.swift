@@ -24,13 +24,20 @@ class Stream<T>: StreamConvertable
 	public typealias Value = T
 	public typealias ListenerType = AnyListener<Value>
 
+	/** Adds a "debug" listener to the stream. There can only be one debug listener.
+
+	A debug listener is like any other listener. The only difference is that a debug listener is "stealthy": its presence/absence does not trigger the start/stop of the stream (or the producer inside the stream). This is useful so you can inspect what is going on without changing the behavior of the program. If you have an idle stream and you add a normal listener to it, the stream will start executing. But if you set a debug listener on an idle stream, it won't start executing (not until the first normal listener is added).
+
+	Don't use this to build app logic. In most cases the debug operator works just fine. Only use this if you know what you're doing. */
+	public var debugListener: ListenerType? = nil
+
 	/// Creates a Stream that does nothing. It never emits any event.
 	public convenience init() {
 		self.init(producer: AnyProducer<Value>(start: { _ in }, stop: { }))
 	}
 	
 	/// Creates a Stream that immediately emits the "complete" notification when started, and that's it.
-	open static func emptyStream<Value>() -> Stream<Value> {
+	public static func emptyStream<Value>() -> Stream<Value> {
 		let producer = AnyProducer<Value>(start: { $0.complete() }, stop: { })
 		return Stream<Value>(producer: producer)
 	}
@@ -58,16 +65,16 @@ class Stream<T>: StreamConvertable
 	public typealias RemoveToken = String
 	
 	/// Adds a Listener to the Stream.
-	open func add<L: Listener>(listener: L) -> RemoveToken where Value == L.ListenerValue {
+	public func add<L: Listener>(listener: L) -> RemoveToken where Value == L.ListenerValue {
 		return _add(AnyListener(listener))
 	}
 	
 	/// Removes a Listener from the Stream, assuming the Listener was added to it.
-	open func removeListener(_ token: RemoveToken) {
+	public func removeListener(_ token: RemoveToken) {
 		remove(token)
 	}
 
-	open func asStream() -> Stream<Value> {
+	public func asStream() -> Stream<Value> {
 		return self
 	}
 
@@ -105,7 +112,6 @@ class Stream<T>: StreamConvertable
 	
 	private let producer: AnyProducer<Value>
 	private var listeners: [String: ListenerType] = [:]
-	private var debugListener: ListenerType? = nil
 	private var ended = false
 	private var stopID: dispatch_cancelable_closure? = nil
 	

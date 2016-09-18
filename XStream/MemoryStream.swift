@@ -11,8 +11,7 @@ import Foundation
 
 final class MemoryStream<T>: Stream<T>
 {
-	/// Creates a new Stream given a Producer.
-	public override init<P: Producer>(producer: P) where P.ProducerValue == Value {
+	override init<P: Producer>(producer: P) where P.ProducerValue == Value {
 		super.init(producer: producer)
 	}
 	
@@ -23,7 +22,7 @@ final class MemoryStream<T>: Stream<T>
 	}
 	
 	override func _add(_ listener: ListenerType) -> RemoveToken {
-		if let value = lastValue , nextCalled {
+		if let value = lastValue, nextCalled {
 			listener.next(value)
 		}
 		let result = super._add(listener)
@@ -31,6 +30,5 @@ final class MemoryStream<T>: Stream<T>
 	}
 
 	private var lastValue: Value? = nil
-	private var nextCalled = false
-	
+	private var nextCalled = false // nextCalled is required to support Value == Void type
 }
