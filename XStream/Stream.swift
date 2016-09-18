@@ -74,6 +74,18 @@ class Stream<T>: StreamConvertable
 		remove(token)
 	}
 
+	/**
+		*imitate* changes this current Stream to emit the same events that the `other` given Stream does. This method returns nothing.
+		This method exists to allow one thing: **circular dependency of streams**. For instance, let's imagine that for some reason you need to create a circular dependency where stream `first$` depends on stream `second$` which in turn depends on `first$` 
+	*/
+	public func imitate(target: Stream) {
+		precondition(target is MemoryStream == false)
+		if let imitateToken = imitateToken, let _target = self.target {
+			_target.remove(imitateToken)
+		}
+		imitateToken = target.add(listener: AnyListener(next: self.next, complete: self.complete, error: self.error))
+	}
+	
 	public func asStream() -> Stream<Value> {
 		return self
 	}
@@ -114,6 +126,8 @@ class Stream<T>: StreamConvertable
 	private var listeners: [String: ListenerType] = [:]
 	private var ended = false
 	private var stopID: dispatch_cancelable_closure? = nil
+	private var target: Stream?
+	private var imitateToken: RemoveToken?
 	
 	private func notify(_ fn: (ListenerType) -> Void) {
 		for listener in listeners.values {
