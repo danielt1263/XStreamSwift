@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09FE68FD1DE338310095DCA2 /* Debuonce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FE68FC1DE338310095DCA2 /* Debuonce.swift */; };
 		72148FE71D7F986F00297F0E /* Flatten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72148FE61D7F986F00297F0E /* Flatten.swift */; };
 		72222C541D7B527C00EA03EA /* XStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 72222C531D7B527C00EA03EA /* XStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		72222C5B1D7B527C00EA03EA /* XStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72222C501D7B527C00EA03EA /* XStream.framework */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09FE68FC1DE338310095DCA2 /* Debuonce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debuonce.swift; sourceTree = "<group>"; };
 		72148FE61D7F986F00297F0E /* Flatten.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flatten.swift; sourceTree = "<group>"; };
 		72222C501D7B527C00EA03EA /* XStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		72222C531D7B527C00EA03EA /* XStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XStream.h; sourceTree = "<group>"; };
@@ -149,6 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				72EF7B651D85CE9000739FC1 /* Compose.swift */,
+				72F1CB5D1D8E09A800F32214 /* Debug.swift */,
+				09FE68FC1DE338310095DCA2 /* Debuonce.swift */,
 				72222C891D7C6C2F00EA03EA /* Drop.swift */,
 				72222C8F1D7C745D00EA03EA /* EndWhen.swift */,
 				726817DF1D7E391F00395CA4 /* Filter.swift */,
@@ -161,7 +165,6 @@
 				72EF7B631D85C92800739FC1 /* ReplaceError.swift */,
 				72222C8D1D7C716A00EA03EA /* StartWith.swift */,
 				72222C871D7C68AA00EA03EA /* Take.swift */,
-				72F1CB5D1D8E09A800F32214 /* Debug.swift */,
 			);
 			name = Operators;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				72222C7D1D7C4E7A00EA03EA /* CancelableDelay.swift in Sources */,
 				72222C8A1D7C6C2F00EA03EA /* Drop.swift in Sources */,
 				72F1CB5E1D8E09A800F32214 /* Debug.swift in Sources */,
+				09FE68FD1DE338310095DCA2 /* Debuonce.swift in Sources */,
 				72222C861D7C66FB00EA03EA /* MapTo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
