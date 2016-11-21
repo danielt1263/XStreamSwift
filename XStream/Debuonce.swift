@@ -25,6 +25,13 @@ final class DebounceOperator<T>: Listener, Producer
 	typealias ListenerValue = T
 	typealias ProducerValue = T
 
+	let inStream: Stream<T>
+	var removeToken: Stream<T>.RemoveToken?
+	var outStream: AnyListener<T>?
+	let interval: TimeInterval
+	weak var timer: Timer?
+	var nextValue: T?
+
 	init(interval: TimeInterval, inStream: Stream<T>) {
 		self.inStream = inStream
 		self.interval = interval
@@ -48,7 +55,8 @@ final class DebounceOperator<T>: Listener, Producer
 			timer = Timer(timeInterval: interval, repeats: false) { [weak self] _ in
 				self?.outStream?.next(value)
 			}
-		} else {
+		}
+		else {
 			nextValue = value
 			timer = Timer(timeInterval: interval, target: self, selector: #selector(DebounceOperator<T>.timerFired), userInfo: nil, repeats: false)
 		}
@@ -61,15 +69,8 @@ final class DebounceOperator<T>: Listener, Producer
 		outStream?.error(error)
 	}
 
-	private let inStream: Stream<T>
-	private var removeToken: Stream<T>.RemoveToken?
-	private var outStream: AnyListener<T>?
-	private let interval: TimeInterval
-	private weak var timer: Timer?
-	private var nextValue: T?
-
 	@objc
-	private func timerFired(timer: Timer) {
+	func timerFired(timer: Timer) {
 		guard let nextValue = nextValue else { return }
 		outStream?.next(nextValue)
 	}
