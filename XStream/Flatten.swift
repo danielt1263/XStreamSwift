@@ -11,7 +11,7 @@ import Foundation
 
 extension StreamConvertable where Value: StreamConvertable
 {
-	public func flatten<S: StreamConvertable>() -> Stream<Value.Value> where S.Value == Value {
+	public func flatten() -> Stream<Value.Value> {
 		let op = FlattenOperator<Value>(inStream: self.asStream())
 		return Stream(producer: op)
 	}

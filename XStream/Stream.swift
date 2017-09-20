@@ -66,9 +66,24 @@ class Stream<T>: StreamConvertable
 	
 	/// Adds a Listener to the Stream.
 	public func add<L: Listener>(listener: L) -> RemoveToken where Value == L.ListenerValue {
-		return _add(AnyListener(listener))
+		return add(listener: AnyListener(listener))
 	}
 	
+	public func add(listener: ListenerType) -> RemoveToken {
+		guard ended == false else { return "" }
+		let removeToken = UUID().uuidString
+		listeners[removeToken] = listener
+		if listeners.count == 1 {
+			if let stopID = stopID {
+				cancel_delay(stopID)
+			}
+			else {
+				producer.start(for: AnyListener(next: self.next, complete: self.complete, error: self.error))
+			}
+		}
+		return removeToken
+	}
+
 	/// Removes a Listener from the Stream, assuming the Listener was added to it.
 	public func removeListener(_ token: RemoveToken) {
 		remove(token)
@@ -105,21 +120,6 @@ class Stream<T>: StreamConvertable
 		debugListener?.error(error)
 		notify { $0.error(error) }
 		tearDown()
-	}
-	
-	func _add(_ listener: ListenerType) -> RemoveToken {
-		guard ended == false else { return "" }
-		let removeToken = UUID().uuidString
-		listeners[removeToken] = listener
-		if listeners.count == 1 {
-			if let stopID = stopID {
-				cancel_delay(stopID)
-			}
-			else {
-				producer.start(for: AnyListener(next: self.next, complete: self.complete, error: self.error))
-			}
-		}
-		return removeToken
 	}
 	
 	private let producer: AnyProducer<Value>

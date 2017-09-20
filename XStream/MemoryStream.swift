@@ -21,11 +21,11 @@ final class MemoryStream<T>: Stream<T>
 		super.next(value)
 	}
 	
-	override func _add(_ listener: ListenerType) -> RemoveToken {
+	override func add(listener: ListenerType) -> RemoveToken {
 		if let value = lastValue, nextCalled {
 			listener.next(value)
 		}
-		let result = super._add(listener)
+		let result = super.add(listener: listener)
 		return result
 	}
 

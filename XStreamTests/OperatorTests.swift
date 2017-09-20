@@ -130,7 +130,7 @@ final class OperatorTests: XCTestCase {
 	
 	func testFold() {
 		let expectation = self.expectation(description: "testFold")
-		let stream = periodicStream(0.20).take(4).fold(0) { $0.0 + $0.1 }
+		let stream = periodicStream(0.20).take(4).fold(0) { $0 + $1 }
 		let expected = [0, 0, 1, 3, 6]
 		var index = 0
 		

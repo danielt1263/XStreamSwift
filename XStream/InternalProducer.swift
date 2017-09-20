@@ -38,7 +38,7 @@ final class PeriodicProducer: Producer
 		timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos: .userInitiated))
 		let timeInterval = DispatchTimeInterval.milliseconds(Int(period * 1000.0))
 		let start = DispatchTime.now() + timeInterval
-		timer.scheduleRepeating(deadline: start, interval: timeInterval)
+		timer.schedule(deadline: start, repeating: timeInterval)
 	}
 	
 	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
