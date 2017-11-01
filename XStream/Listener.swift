@@ -29,7 +29,7 @@ final class AnyListener<T>: Listener
 		self.init(next: listener.next, complete: listener.complete, error: listener.error)
 	}
 	
-	init(next: @escaping (ListenerValue) -> Void, complete: @escaping () -> Void, error: @escaping (Error) -> Void) {
+	init(next: @escaping (ListenerValue) -> Void, complete: @escaping () -> Void = { }, error: @escaping (Error) -> Void = { _ in }) {
 		_next = next
 		_error = error
 		_complete = complete
