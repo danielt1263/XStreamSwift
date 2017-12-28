@@ -37,7 +37,7 @@ class Stream<T>: StreamConvertable
 	}
 	
 	/// Creates a Stream that immediately emits the "complete" notification when started, and that's it.
-	public static func emptyStream<Value>() -> Stream<Value> {
+	public static func empty<Value>() -> Stream<Value> {
 		let producer = AnyProducer<Value>(start: { $0.complete() }, stop: { })
 		return Stream<Value>(producer: producer)
 	}

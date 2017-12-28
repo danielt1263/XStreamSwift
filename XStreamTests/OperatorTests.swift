@@ -17,7 +17,7 @@ final class OperatorTests: XCTestCase {
 		let expected = [10, 20, 30]
 		var index = 0
 		var completeCalled = false
-		
+
 		let _ = stream.add(listener: AnyListener<Int>(next: { val in
 			XCTAssert(val == expected[index])
 			index += 1
@@ -50,12 +50,12 @@ final class OperatorTests: XCTestCase {
 		XCTAssert(index == expected.count)
 	}
 	
-	func testDrop() {
-		let stream = XStream.Stream(fromArray: [1, 2, 3, 4, 5]).drop(3)
+	func testDropFirst() {
+		let stream = XStream.Stream(fromArray: [1, 2, 3, 4, 5]).dropFirst(3)
 		let expected = [4, 5]
 		var index = 0
 		var completeCalled = false
-		
+
 		let _ = stream.add(listener: AnyListener<Int>(next: { val in
 			XCTAssert(val == expected[index])
 			index += 1
@@ -64,7 +64,26 @@ final class OperatorTests: XCTestCase {
 		}, error: { _ in
 			XCTFail()
 		}))
-		
+
+		XCTAssert(completeCalled)
+		XCTAssert(index == expected.count)
+	}
+
+	func testDropLast() {
+		let stream = XStream.Stream(fromArray: [1, 2, 3, 4, 5]).dropLast(3)
+		let expected = [1, 2]
+		var index = 0
+		var completeCalled = false
+
+		let _ = stream.add(listener: AnyListener<Int>(next: { val in
+			XCTAssert(val == expected[index])
+			index += 1
+		}, complete: {
+			completeCalled = true
+		}, error: { _ in
+			XCTFail()
+		}))
+
 		XCTAssert(completeCalled)
 		XCTAssert(index == expected.count)
 	}

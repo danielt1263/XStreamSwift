@@ -1,5 +1,5 @@
 //
-//  Drop.swift
+//  DropFirst.swift
 //  XStream
 //
 //  Created by Daniel Tartaglia on 9/4/16.
@@ -12,15 +12,15 @@ import Foundation
 extension Stream
 {
 	/// Ignores the first `count` events from the input stream, and then after that starts forwarding events from the input stream to the output stream.
-	public func drop(_ count: Int) -> Stream {
-		let op = DropOperator(count: count, inStream: self)
+	public func dropFirst(_ n: Int) -> Stream {
+		let op = DropFirstOperator(count: n, inStream: self)
 		return Stream(producer: op)
 	}
 }
 
 
 private
-final class DropOperator<T>: Listener, Producer
+final class DropFirstOperator<T>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = T
