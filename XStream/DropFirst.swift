@@ -11,8 +11,18 @@ import Foundation
 
 extension Stream
 {
-	/// Ignores the first `count` events from the input stream, and then after that starts forwarding events from the input stream to the output stream.
+	/// Returns a Stream containing all but the given number of initial
+	/// events.
+	///
+	/// If the number of events to drop exceeds the number of events in
+	/// the stream, the result is an empty stream.
+	///
+	/// - Parameter n: The number of elements to drop from the beginning of
+	///   the sequence. `n` must be greater than or equal to zero.
+	/// - Returns: A Stream starting after the specified number of
+	///   elements.
 	public func dropFirst(_ n: Int) -> Stream {
+		precondition(n >= 0)
 		let op = DropFirstOperator(count: n, inStream: self)
 		return Stream(producer: op)
 	}

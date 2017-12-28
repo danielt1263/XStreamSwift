@@ -53,7 +53,7 @@ class Stream<T>: StreamConvertable
 	}
 	
 	/// Converts an array to a stream. The returned stream will emit synchronously all the items in the array, and then complete.
-	public convenience init(fromArray array: [Value]) {
+	public convenience init(from array: [Value]) {
 		self.init(producer: FromArrayProducer(array: array))
 	}
 	

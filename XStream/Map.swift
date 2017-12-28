@@ -11,7 +11,14 @@ import Foundation
 
 extension Stream
 {
-	/// Transforms each event from the input Stream through a `transform` function, to get a Stream that emits those transformed events.
+	/// Returns a Stream containing the results of mapping the given closure
+	/// over the stream's events.
+	///
+	/// - Parameter transform: A mapping closure. `transform` accepts a
+	///   value of this sequence as its parameter and returns a transformed
+	///   value of the same or of a different type.
+	/// - Returns: A Stream containing the transformed elements of this
+	///   stream.
 	public func map<U>(_ transform: @escaping (Value) throws -> U) -> Stream<U> {
 		let op = MapOperator(transform: transform, inStream: self)
 		return Stream<U>(producer: op)

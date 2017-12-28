@@ -11,6 +11,13 @@ import Foundation
 
 extension Stream
 {
+	/// Returns a Stream that skips events while `predicate` returns
+	/// `true` and emits the remaining events.
+	///
+	/// - Parameter predicate: A closure that takes an value of the
+	///   Stream as its argument and returns `true` if the value should
+	///   be skipped or `false` if it should be included. Once the predicate
+	///   returns `false` it will not be called again.
 	public func drop(while predicate: @escaping (Value) throws -> Bool) -> Stream {
 		let op = DropWhileOperator(predicate: predicate, inStream: self)
 		return Stream(producer: op)

@@ -11,8 +11,20 @@ import Foundation
 
 extension Stream
 {
-	/// Forwards events from the input stream to the output stream with a buffer of `count` events. Completes when the input stream completes with the result that the output stream will not produce the last `n` elements.
+	/// Returns a Stream containing all but the specified number of final
+	/// events.
+	///
+	/// The stream must be finite. If the number of events to drop exceeds
+	/// the number of events in the stream, the result is an empty
+	/// stream.
+	///
+	/// - Parameter n: The number of events to drop off the end of the
+	///   stream. `n` must be greater than or equal to zero.
+	/// - Returns: A Stream leaving off the specified number of elements.
+	///
+	/// - Complexity: O(*n*), where *n* is the length of the sequence.
 	public func dropLast(_ n: Int) -> Stream {
+		precondition(n >= 0)
 		let op = DropLastOperator(count: n, inStream: self)
 		return Stream(producer: op)
 	}

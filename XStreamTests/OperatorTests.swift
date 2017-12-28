@@ -13,7 +13,7 @@ import XCTest
 final class OperatorTests: XCTestCase {
 	
 	func testMap() {
-		let stream = XStream.Stream(fromArray: [1, 2, 3]).map { $0 * 10 }
+		let stream = XStream.Stream(from: [1, 2, 3]).map { $0 * 10 }
 		let expected = [10, 20, 30]
 		var index = 0
 		var completeCalled = false
@@ -32,7 +32,7 @@ final class OperatorTests: XCTestCase {
 	}
 
 	func testTake() {
-		let stream = XStream.Stream(fromArray: [1, 2, 3, 4, 5]).take(3)
+		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).take(3)
 		let expected = [1, 2, 3]
 		var index = 0
 		var completeCalled = false
@@ -51,7 +51,7 @@ final class OperatorTests: XCTestCase {
 	}
 	
 	func testDropFirst() {
-		let stream = XStream.Stream(fromArray: [1, 2, 3, 4, 5]).dropFirst(3)
+		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).dropFirst(3)
 		let expected = [4, 5]
 		var index = 0
 		var completeCalled = false
@@ -70,7 +70,7 @@ final class OperatorTests: XCTestCase {
 	}
 
 	func testDropLast() {
-		let stream = XStream.Stream(fromArray: [1, 2, 3, 4, 5]).dropLast(3)
+		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).dropLast(3)
 		let expected = [1, 2]
 		var index = 0
 		var completeCalled = false
@@ -89,7 +89,7 @@ final class OperatorTests: XCTestCase {
 	}
 
 	func testDropWhile() {
-		let stream = XStream.Stream(fromArray: [1, 2, 3, 4, 5]).drop(while: { $0 < 3 })
+		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).drop(while: { $0 < 3 })
 		let expected = [3, 4, 5]
 		var index = 0
 		var completeCalled = false
@@ -108,7 +108,7 @@ final class OperatorTests: XCTestCase {
 	}
 
 	func testLast() {
-		let stream = XStream.Stream(fromArray: [1, 2, 3, 4, 5]).last()
+		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).last()
 		let expected = [5]
 		var index = 0
 		var completeCalled = false
@@ -127,7 +127,7 @@ final class OperatorTests: XCTestCase {
 	}
 	
 	func testStartWith() {
-		let stream = XStream.Stream(fromArray: [1, 2, 3, 4, 5]).startWith(0)
+		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).startWith(0)
 		let expected = [0, 1, 2, 3, 4, 5]
 		var index = 0
 		var completeCalled = false
