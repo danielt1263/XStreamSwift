@@ -129,8 +129,8 @@ final class OperatorTests: XCTestCase {
 	}
 
 	func testLast() {
-		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).last()
-		let expected = [5]
+		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).suffix(2)
+		let expected = [4, 5]
 		var index = 0
 		var completeCalled = false
 		
