@@ -88,6 +88,25 @@ final class OperatorTests: XCTestCase {
 		XCTAssert(index == expected.count)
 	}
 
+	func testDropWhile() {
+		let stream = XStream.Stream(fromArray: [1, 2, 3, 4, 5]).drop(while: { $0 < 3 })
+		let expected = [3, 4, 5]
+		var index = 0
+		var completeCalled = false
+
+		let _ = stream.add(listener: AnyListener<Int>(next: { val in
+			XCTAssert(val == expected[index])
+			index += 1
+		}, complete: {
+			completeCalled = true
+		}, error: { _ in
+			XCTFail()
+		}))
+
+		XCTAssert(completeCalled)
+		XCTAssert(index == expected.count)
+	}
+
 	func testLast() {
 		let stream = XStream.Stream(fromArray: [1, 2, 3, 4, 5]).last()
 		let expected = [5]
