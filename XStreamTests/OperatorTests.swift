@@ -50,7 +50,27 @@ final class OperatorTests: XCTestCase {
 		XCTAssert(completeCalled)
 		XCTAssert(index == expected.count)
 	}
-	
+
+	func testPrefixWhile() {
+		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).prefix(while: { $0 < 4 })
+		let expected = [1, 2, 3]
+		var index = 0
+		var completeCalled = false
+
+		let _ = stream.add(listener: AnyListener<Int>(next: { val in
+			XCTAssert(val == expected[index])
+			index += 1
+		}, complete: {
+			XCTAssert(completeCalled == false)
+			completeCalled = true
+		}, error: { _ in
+			XCTFail()
+		}))
+
+		XCTAssert(completeCalled)
+		XCTAssert(index == expected.count)
+	}
+
 	func testDropFirst() {
 		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).dropFirst(3)
 		let expected = [4, 5]
