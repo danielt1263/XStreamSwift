@@ -31,8 +31,8 @@ final class OperatorTests: XCTestCase {
 		XCTAssert(index == expected.count)
 	}
 
-	func testTake() {
-		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).take(3)
+	func testPrefix() {
+		let stream = XStream.Stream(from: [1, 2, 3, 4, 5]).prefix(3)
 		let expected = [1, 2, 3]
 		var index = 0
 		var completeCalled = false
@@ -41,6 +41,7 @@ final class OperatorTests: XCTestCase {
 			XCTAssert(val == expected[index])
 			index += 1
 		}, complete: {
+			XCTAssert(completeCalled == false)
 			completeCalled = true
 		}, error: { _ in
 			XCTFail()
@@ -168,7 +169,7 @@ final class OperatorTests: XCTestCase {
 	
 	func testFold() {
 		let expectation = self.expectation(description: "testFold")
-		let stream = periodicStream(0.20).take(4).fold(0) { $0 + $1 }
+		let stream = periodicStream(0.20).prefix(4).fold(0) { $0 + $1 }
 		let expected = [0, 0, 1, 3, 6]
 		var index = 0
 		
@@ -189,7 +190,7 @@ final class OperatorTests: XCTestCase {
 		let expectation = self.expectation(description: "testDebugInspecting")
 		let expected = [0, 1, 2]
 		var index = 0
-		let stream = periodicStream(0.20).take(3).debug {
+		let stream = periodicStream(0.20).prefix(3).debug {
 			XCTAssertEqual($0, expected[index])
 			index += 1
 		}

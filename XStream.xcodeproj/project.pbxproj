@@ -22,7 +22,7 @@
 		72222C7F1D7C521500EA03EA /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C7E1D7C521500EA03EA /* OperatorTests.swift */; };
 		72222C821D7C52B800EA03EA /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C811D7C52B800EA03EA /* Map.swift */; };
 		72222C861D7C66FB00EA03EA /* MapTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C851D7C66FB00EA03EA /* MapTo.swift */; };
-		72222C881D7C68AA00EA03EA /* Take.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C871D7C68AA00EA03EA /* Take.swift */; };
+		72222C881D7C68AA00EA03EA /* Prefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C871D7C68AA00EA03EA /* Prefix.swift */; };
 		72222C8A1D7C6C2F00EA03EA /* DropFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C891D7C6C2F00EA03EA /* DropFirst.swift */; };
 		72222C8C1D7C703C00EA03EA /* Last.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8B1D7C703C00EA03EA /* Last.swift */; };
 		72222C8E1D7C716A00EA03EA /* StartWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72222C8D1D7C716A00EA03EA /* StartWith.swift */; };
@@ -69,7 +69,7 @@
 		72222C7E1D7C521500EA03EA /* OperatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		72222C811D7C52B800EA03EA /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		72222C851D7C66FB00EA03EA /* MapTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTo.swift; sourceTree = "<group>"; };
-		72222C871D7C68AA00EA03EA /* Take.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Take.swift; sourceTree = "<group>"; };
+		72222C871D7C68AA00EA03EA /* Prefix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefix.swift; sourceTree = "<group>"; };
 		72222C891D7C6C2F00EA03EA /* DropFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropFirst.swift; sourceTree = "<group>"; };
 		72222C8B1D7C703C00EA03EA /* Last.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Last.swift; sourceTree = "<group>"; };
 		72222C8D1D7C716A00EA03EA /* StartWith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartWith.swift; sourceTree = "<group>"; };
@@ -170,10 +170,10 @@
 				72222C8B1D7C703C00EA03EA /* Last.swift */,
 				72222C811D7C52B800EA03EA /* Map.swift */,
 				72222C851D7C66FB00EA03EA /* MapTo.swift */,
+				72222C871D7C68AA00EA03EA /* Prefix.swift */,
 				72C33D821D88E55F00FAA5A6 /* Remember.swift */,
 				72EF7B631D85C92800739FC1 /* ReplaceError.swift */,
 				72222C8D1D7C716A00EA03EA /* StartWith.swift */,
-				72222C871D7C68AA00EA03EA /* Take.swift */,
 			);
 			name = Operators;
 			sourceTree = "<group>";
@@ -302,7 +302,7 @@
 				72222C711D7B52BF00EA03EA /* MemoryStream.swift in Sources */,
 				72222C8C1D7C703C00EA03EA /* Last.swift in Sources */,
 				72C33D831D88E55F00FAA5A6 /* Remember.swift in Sources */,
-				72222C881D7C68AA00EA03EA /* Take.swift in Sources */,
+				72222C881D7C68AA00EA03EA /* Prefix.swift in Sources */,
 				72222C6D1D7B528C00EA03EA /* Producer.swift in Sources */,
 				72222C8E1D7C716A00EA03EA /* StartWith.swift in Sources */,
 				727232EB1D7D149700E5E6D3 /* Fold.swift in Sources */,

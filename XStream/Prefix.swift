@@ -1,5 +1,5 @@
 //
-//  Take.swift
+//  Prefix.swift
 //  XStream
 //
 //  Created by Daniel Tartaglia on 9/4/16.
@@ -11,16 +11,26 @@ import Foundation
 
 extension Stream
 {
-	/// Lets the first `count` events from the input stream pass to the output stream, then makes the output stream complete.
-	public func take(_ count: Int) -> Stream {
-		let op = TakeOperator(count: count, inStream: self)
+	/// Returns a Stream, up to the specified maximum length, containing
+	/// the initial events of the stream.
+	///
+	/// If the maximum length exceeds the number of events in the stream,
+	/// the result contains all the events in the stream.
+	///
+	/// - Parameter maxLength: The maximum number of events to emit.
+	///   `maxLength` must be greater than or equal to zero.
+	/// - Returns: A Stream starting at the beginning of this stream
+	///   with at most `maxLength` elements.
+	public func prefix(_ maxLength: Int) -> Stream {
+		precondition(maxLength >= 0)
+		let op = PrefixOperator(maxLength: maxLength, inStream: self)
 		return Stream(producer: op)
 	}
 }
 
 
 private
-final class TakeOperator<T>: Listener, Producer
+final class PrefixOperator<T>: Listener, Producer
 {
 	typealias ListenerValue = T
 	typealias ProducerValue = T
@@ -31,9 +41,9 @@ final class TakeOperator<T>: Listener, Producer
 	let max: Int
 	var taken = 0
 	
-	init(count: Int, inStream: Stream<T>) {
+	init(maxLength: Int, inStream: Stream<T>) {
 		self.inStream = inStream
-		self.max = count
+		self.max = maxLength
 	}
 	
 	func start<L : Listener>(for listener: L) where ProducerValue == L.ListenerValue {
